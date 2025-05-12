@@ -54,3 +54,17 @@ Route::get('/', function () {
   Route::get('schedule', function () {
     return view('pages.schedule');
 });
+
+// Login
+
+  Route::get('login', function () {
+    return view('pages.login');
+});
+
+// Regisyer
+
+  Route::get('register', function () {
+    return view('pages.register');
+});
+
+
