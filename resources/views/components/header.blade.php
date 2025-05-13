@@ -39,7 +39,7 @@
 
 <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md z-50">
     <a class="block px-4 py-2 {{ Request::is('home') ? 'text-green-600 border-b-2 border-green-600' : 'hover:text-green-600' }}"
-       href="{{ url('home') }}">
+       href="{{ url('/') }}">
         Home
     </a>
     <a class="block px-4 py-2 {{ Request::is('about') ? 'text-green-600 border-b-2 border-green-600' : 'hover:text-green-600' }}"

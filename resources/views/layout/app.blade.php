@@ -23,14 +23,7 @@
         .mobile-menu {
             display: none;
         }
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: block;
-            }
-            .navbar {
-                display: none;
-            }
-        }
+        
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
