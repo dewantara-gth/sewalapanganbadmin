@@ -1,6 +1,6 @@
 @extends('layout.acc')
 
-@section('title', 'Beranda')
+@section('title', 'Register')
 
 
 @section('content')

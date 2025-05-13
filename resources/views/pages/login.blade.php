@@ -1,5 +1,7 @@
 @extends('layout.acc')
 
+@section('title', 'Login')
+
 @section('content')
 <div
     class="bg-white rounded-lg shadow-md max-w-4xl w-full flex flex-col md:flex-row overflow-hidden mx-auto"
