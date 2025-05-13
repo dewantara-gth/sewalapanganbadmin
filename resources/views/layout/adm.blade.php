@@ -13,6 +13,18 @@
     {{-- Tambahan favicon dan meta --}}
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <meta name="description" content="@yield('meta_description', 'Aplikasi Laravel')">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          inter: ['Inter', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
 
     <style>
         /* Custom styles for the mobile menu */

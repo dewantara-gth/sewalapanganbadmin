@@ -73,5 +73,10 @@ Route::get('form', function () {
     return view('pages.form');
 })->name('form');
 
+// Register
+
+  Route::get('addcourt', function () {
+    return view('pages.addcourt');
+})->name('addcourt');
 
 

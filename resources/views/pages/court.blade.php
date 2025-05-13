@@ -32,7 +32,7 @@
                             Here is a list of all COURT Data
                         </p>
                     </div>
-                    <a class="bg-blue-600 text-white text-xs font-semibold px-4 py-2 rounded shadow hover:bg-blue-700 focus:outline-none whitespace-nowrap inline-block text-center" href="add_court.blade.php">
+                    <a class="bg-blue-600 text-white text-xs font-semibold px-4 py-2 rounded shadow hover:bg-blue-700 focus:outline-none whitespace-nowrap inline-block text-center" href="{{ route("addcourt")}}">
                         Add Court Data
                     </a>
 
