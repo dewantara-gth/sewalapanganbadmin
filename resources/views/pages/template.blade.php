@@ -1,10 +1,10 @@
-@extends('layout.app')
+    @extends('layout.app')
 
-@section('title', 'Beranda')
+    @section('title', 'Beranda')
 
 
-@section('content')
+    @section('content')
 
-    
+        
 
-@endsection
+    @endsection
