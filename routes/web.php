@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
   // Home
 
-  Route::get('home', function () {
+  Route::get('/', function () {
     return view('pages.home');
 });
 
@@ -61,10 +61,17 @@ Route::get('/', function () {
     return view('pages.login');
 });
 
-// Regisyer
+// Register
 
   Route::get('register', function () {
     return view('pages.register');
 });
+
+// Form Booking
+
+Route::get('form', function () {
+    return view('pages.form');
+})->name('form');
+
 
 

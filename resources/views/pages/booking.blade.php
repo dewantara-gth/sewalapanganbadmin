@@ -23,7 +23,7 @@
                         </span>
                     </p>
                     <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        Book Now
+                     <a href="{{ route("form")}}"> Book Now </a>
                     </button>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         </span>
                     </p>
                     <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        Book Now
+                       <a href="{{ route("form")}}"> Book Now </a>
                     </button>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         </span>
                     </p>
                     <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        Book Now
+                       <a href="{{ route("form")}}"> Book Now </a>
                     </button>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                         </span>
                     </p>
                     <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        Book Now
+                        <a href="{{ route("form")}}"> Book Now </a>
                     </button>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                         </span>
                     </p>
                     <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        Book Now
+                        <a href="{{ route("form")}}"> Book Now </a>
                     </button>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                         </span>
                     </p>
                     <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        Book Now
+                       <a href="{{ route("form")}}"> Book Now </a>
                     </button>
                 </div>
             </div>
