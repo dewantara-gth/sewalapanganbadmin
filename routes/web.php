@@ -73,10 +73,16 @@ Route::get('form', function () {
     return view('pages.form');
 })->name('form');
 
-// Register
+// Add Court
 
   Route::get('addcourt', function () {
     return view('pages.addcourt');
 })->name('addcourt');
+
+// Add Booking
+
+Route::get('add_booking', function () {
+  return view('pages.add_booking');
+})->name('add_booking');
 
 

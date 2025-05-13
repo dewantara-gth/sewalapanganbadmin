@@ -7,7 +7,7 @@
     </div>
 
     <div class="hidden md:flex space-x-6">
-        <a href="{{ url('home') }}"
+        <a href="{{ url('/') }}"
            class="{{ Request::is('home') ? 'text-green-600 border-b-2 border-green-600' : 'hover:text-green-600' }}">
             Home
         </a>

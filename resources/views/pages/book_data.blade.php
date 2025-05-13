@@ -33,7 +33,7 @@
                             Here is a list of all Booking Data
                         </p>
                     </div>
-                    <a
+                    <a href="{{ route('add_booking') }}"
                         class="bg-blue-600 text-white text-xs font-semibold px-4 py-2 rounded shadow hover:bg-blue-700 focus:outline-none whitespace-nowrap" href="add_booking.blade.php">
                         Add Booking Data
                     </a>

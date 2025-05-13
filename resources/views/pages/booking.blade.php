@@ -23,7 +23,8 @@
                         </span>
                     </p>
                     <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                     <a href="{{ route("form")}}"> Book Now </a>
+                    <a href="{{ route('form') }}">Book Now</a>
+
                     </button>
                 </div>
             </div>
