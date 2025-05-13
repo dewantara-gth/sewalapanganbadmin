@@ -1,6 +1,6 @@
 @extends('layout.adm')
 
-@section('title', 'Beranda')
+@section('title', 'Add Court Data')
 
 
 @section('content')
