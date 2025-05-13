@@ -2,9 +2,8 @@
 
 @section('content')
 <div
-      class="bg-white rounded-md shadow-md max-w-md w-full flex flex-col md:flex-row overflow-hidden mx-auto"
-      style="margin-left:auto; margin-right:auto;"
-    >
+    class="bg-white rounded-lg shadow-md max-w-4xl w-full flex flex-col md:flex-row overflow-hidden mx-auto"
+  >
       <form
         action="#"
         method="POST"
