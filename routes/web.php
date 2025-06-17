@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -55,16 +55,17 @@ use Illuminate\Support\Facades\Route;
     return view('pages.schedule');
 });
 
-// Login
+/// Auth - Register
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 
-  Route::get('login', function () {
-    return view('pages.login');
-});
+// Auth - Login
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-// Register
-
-  Route::get('register', function () {
-    return view('pages.register');
+// Dashboard setelah login
+Route::get('/dash', function () {
+    return view('pages.dash');
 });
 
 // Form Booking
