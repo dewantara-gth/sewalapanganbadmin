@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -33,9 +34,7 @@ use App\Http\Controllers\AuthController;
 
 // Dashboard Admin
 
-  Route::get('dash', function () {
-    return view('pages.dash');
-});
+Route::get('/dash', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 // Court Admin
 
@@ -87,3 +86,13 @@ Route::get('add_booking', function () {
 })->name('add_booking');
 
 
+// Logout
+
+Route::get('/logout', function () {
+  Auth::logout();  // Logout dari Laravel (menghapus sesi pengguna)
+  session()->flush(); // Menghapus semua data sesi
+
+  return redirect()->route('login'); // Arahkan kembali ke halaman login
+})->name('logout');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
