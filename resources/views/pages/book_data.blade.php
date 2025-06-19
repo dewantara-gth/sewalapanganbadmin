@@ -13,14 +13,19 @@
                     </button>
                 </div>
                 <div class="flex items-center ml-auto">
-                    <span class="mr-2 md:mr-4 text-gray-700 whitespace-nowrap">Dewantara Bram</span>
-                    <img alt="User avatar of Dewantara Bram, a smiling man with short black hair wearing a blue shirt"
-                        class="h-8 w-8 md:h-10 md:w-10 rounded-full" height="40"
-                        src="https://storage.googleapis.com/a1aa/image/8bhRABXN6qfAH_O5DWhIrN9rgGhUj-t8JMTbbKIYhMc.jpg"
-                        width="40" />
-                    <a class="ml-2 md:ml-4 text-gray-700 hover:text-blue-900" href="login.blade.php">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                     <!-- Menampilkan inisial nama pengguna yang sedang login -->
+                    <span class="mr-2 md:mr-4 text-gray-700 whitespace-nowrap">{{ Auth::user()->username }}</span>
+
+                    <!-- Menampilkan gambar avatar pengguna yang sedang login atau inisial sebagai fallback -->
+                    <div class="h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center bg-gray-300 text-white font-bold">
+                    <!-- Menggunakan inisial huruf pertama sebagai fallback avatar -->
+                    {{ strtoupper(substr(Auth::user()->username, 0, 1)) }}
+                </div>
+
+                <!-- Tombol logout -->
+                <a class="ml-2 md:ml-4 text-gray-700 hover:text-blue-900" href="{{ route('logout') }}">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
                 </div>
             </div>
 

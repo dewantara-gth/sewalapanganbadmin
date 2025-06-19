@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CourtController;
+use App\Http\Controllers\BookDataController;
+use App\Http\Controllers\ScheduleController;
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -62,6 +67,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.st
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
+
 // Dashboard setelah login
 Route::get('/dash', function () {
     return view('pages.dash');
@@ -88,11 +94,13 @@ Route::get('add_booking', function () {
 
 // Logout
 
-Route::get('/logout', function () {
-  Auth::logout();  // Logout dari Laravel (menghapus sesi pengguna)
-  session()->flush(); // Menghapus semua data sesi
-
-  return redirect()->route('login'); // Arahkan kembali ke halaman login
-})->name('logout');
-
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/dash', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+
+Route::get('/court', [CourtController::class, 'index'])->middleware('auth')->name('court');
+
+Route::get('/book_data', [BookDataController::class, 'index'])->middleware('auth')->name('book_data');
+
+Route::get('/schedule', [ScheduleController::class, 'index'])->middleware('auth')->name('schedule');
