@@ -6,6 +6,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CourtController;
 use App\Http\Controllers\BookDataController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AddCourtController;
+use App\Http\Controllers\AddBookingController;
+
+
 
 
 // Route::get('/', function () {
@@ -104,3 +108,7 @@ Route::get('/court', [CourtController::class, 'index'])->middleware('auth')->nam
 Route::get('/book_data', [BookDataController::class, 'index'])->middleware('auth')->name('book_data');
 
 Route::get('/schedule', [ScheduleController::class, 'index'])->middleware('auth')->name('schedule');
+
+Route::get('/addcourt', [AddCourtController::class, 'index'])->middleware('auth')->name('addcourt');
+
+Route::get('/add_booking', [AddBookingController::class, 'index'])->middleware('auth')->name('add_booking');
