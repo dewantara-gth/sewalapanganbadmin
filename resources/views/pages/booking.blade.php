@@ -6,129 +6,32 @@
 @section('content')
 
     <main class="p-4 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img alt="Indoor badminton court with wooden flooring and bright lighting, Court 1"
-                    class="w-full h-48 object-cover" height="400"
-                    src="https://storage.googleapis.com/a1aa/image/c52aebd9-e9f5-46a8-c37e-3aa246c640fa.jpg"
-                    width="600" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold">
-                        Court 1
-                    </h2>
-                    <p class="text-green-600 text-xl font-bold">
-                        $2016
-                        <span class="text-gray-600 text-sm">
-                            /2 Hours
-                        </span>
-                    </p>
-                    <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                    <a href="{{ route('form') }}">Book Now</a>
-
-                    </button>
-                </div>
-            </div>
-            <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img alt="Indoor badminton court with nets and seating area, Court 2" class="w-full h-48 object-cover"
-                    height="400"
-                    src="https://storage.googleapis.com/a1aa/image/5eb92a3f-3f3c-4ba8-d38f-b5344aa7a26e.jpg"
-                    width="600" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold">
-                        Court 2
-                    </h2>
-                    <p class="text-green-600 text-xl font-bold">
-                        $2016
-                        <span class="text-gray-600 text-sm">
-                            /2 Hours
-                        </span>
-                    </p>
-                    <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                       <a href="{{ route("form")}}"> Book Now </a>
-                    </button>
-                </div>
-            </div>
-            <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img alt="Badminton court with players practicing, Court 3" class="w-full h-48 object-cover"
-                    height="400"
-                    src="https://storage.googleapis.com/a1aa/image/bb730955-b189-428a-a032-60ba3b4e9484.jpg"
-                    width="600" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold">
-                        Court 3
-                    </h2>
-                    <p class="text-green-600 text-xl font-bold">
-                        $2016
-                        <span class="text-gray-600 text-sm">
-                            /2 Hours
-                        </span>
-                    </p>
-                    <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                       <a href="{{ route("form")}}"> Book Now </a>
-                    </button>
-                </div>
-            </div>
-            <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img alt="Empty badminton court with green walls and wooden floor, Court 4"
-                    class="w-full h-48 object-cover" height="400"
-                    src="https://storage.googleapis.com/a1aa/image/8cd75077-74ea-4930-d55b-45f1fc5a6144.jpg"
-                    width="600" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold">
-                        Court 4
-                    </h2>
-                    <p class="text-green-600 text-xl font-bold">
-                        $2016
-                        <span class="text-gray-600 text-sm">
-                            /2 Hours
-                        </span>
-                    </p>
-                    <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        <a href="{{ route("form")}}"> Book Now </a>
-                    </button>
-                </div>
-            </div>
-            <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img alt="Badminton court with net and scoreboard, Court 5" class="w-full h-48 object-cover"
-                    height="400"
-                    src="https://storage.googleapis.com/a1aa/image/4dd93fbe-aaf3-400b-ba19-37fa0d0c10be.jpg"
-                    width="600" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold">
-                        Court 5
-                    </h2>
-                    <p class="text-green-600 text-xl font-bold">
-                        $2016
-                        <span class="text-gray-600 text-sm">
-                            /2 Hours
-                        </span>
-                    </p>
-                    <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                        <a href="{{ route("form")}}"> Book Now </a>
-                    </button>
-                </div>
-            </div>
-            <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img alt="Modern badminton court with LED lighting, Court 6" class="w-full h-48 object-cover"
-                    height="400"
-                    src="https://storage.googleapis.com/a1aa/image/33a92dda-0a54-475c-c0a1-f21bba49c6e1.jpg"
-                    width="600" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold">
-                        Court 6
-                    </h2>
-                    <p class="text-green-600 text-xl font-bold">
-                        $2016
-                        <span class="text-gray-600 text-sm">
-                            /2 Hours
-                        </span>
-                    </p>
-                    <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                       <a href="{{ route("form")}}"> Book Now </a>
-                    </button>
-                </div>
-            </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{-- Replace static cards with dynamic loop --}}
+    @foreach($courts as $court)
+    <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <img alt="Court image"
+            class="w-full h-48 object-cover"
+            src="{{ asset('uploads/' . $court->picture) }}" />
+        <div class="p-4">
+            <h2 class="text-lg font-bold">
+                {{ $court->court_name }}
+            </h2>
+            <p class="text-green-600 text-xl font-bold">
+                {{ $court->price }}
+                <span class="text-gray-600 text-sm">
+                    /2 Hours
+                </span>
+            </p>
+            <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
+                <a href="{{ route('form') }}">Book Now</a>
+            </button>
         </div>
+    </div>
+    @endforeach
+</div>
+
+
         <section class="max-w-4xl mx-auto mt-12">
             <div class="bg-green-600 text-white text-center py-4 rounded-t">
                 <h1 class="text-xl font-bold tracking-wide">

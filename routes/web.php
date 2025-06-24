@@ -8,6 +8,7 @@ use App\Http\Controllers\BookDataController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AddCourtController;
 use App\Http\Controllers\AddBookingController;
+use App\Http\Controllers\BookingController;
 
 
 
@@ -104,6 +105,12 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dash', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::get('/court', [CourtController::class, 'index'])->middleware('auth')->name('court');
+Route::get('/courts', [CourtController::class, 'index']);
+Route::get('/courts/create', [CourtController::class, 'create']);
+Route::post('/courts/store', [CourtController::class, 'store']);
+Route::get('/courts/edit/{id}', [CourtController::class, 'edit']);
+Route::put('/courts/update/{id}', [CourtController::class, 'update']);
+Route::delete('/courts/delete/{id}', [CourtController::class, 'destroy']);
 
 Route::get('/book_data', [BookDataController::class, 'index'])->middleware('auth')->name('book_data');
 
@@ -112,3 +119,5 @@ Route::get('/schedule', [ScheduleController::class, 'index'])->middleware('auth'
 Route::get('/addcourt', [AddCourtController::class, 'index'])->middleware('auth')->name('addcourt');
 
 Route::get('/add_booking', [AddBookingController::class, 'index'])->middleware('auth')->name('add_booking');
+
+Route::get('/booking', [BookingController::class, 'index']);
