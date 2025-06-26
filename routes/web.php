@@ -56,10 +56,9 @@ Route::get('/dash', [DashboardController::class, 'index'])->middleware('auth')->
 });
 
 // Booking Data
-
-  Route::get('book_data', function () {
-    return view('pages.book_data');
-});
+Route::get('/admin/bookings', [BookingController::class, 'adminView'])->name('admin.bookings');
+Route::post('/admin/bookings/{id}/verify', [BookingController::class, 'verify'])->name('admin.bookings.verify');
+Route::delete('/booking/{id}', [BookingController::class, 'destroy'])->name('booking.destroy');
 
 // Schedule
 
@@ -124,3 +123,9 @@ Route::get('/addcourt', [AddCourtController::class, 'index'])->middleware('auth'
 Route::get('/add_booking', [AddBookingController::class, 'index'])->middleware('auth')->name('add_booking');
 
 Route::get('/booking', [BookingController::class, 'index']);
+
+Route::get('/booking/form', [BookingController::class, 'form'])->name('booking.form');
+Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+Route::get('/booking/invoice/{id}', [BookingController::class, 'invoice'])->name('booking.invoice');
+Route::post('/booking/upload/{id}', [BookingController::class, 'uploadBukti'])->name('upload.bukti');
+
