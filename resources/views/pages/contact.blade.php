@@ -15,30 +15,33 @@
                     </span>
                 </h2>
                 <p class="mb-8">
-                    Enim tempor eget pharetra facilisis sed maecenas adipiscing. Eu leo molestie vel, ornare non id
-                    blandit netus.
+                Get in Touch with us to learn more about our services. We're here to assist you with any inquiries or requests you might have.
                 </p>
-                <form class="space-y-4">
+                <form class="space-y-4" method="POST" action="{{ route('contact.submit') }}">
+                    @csrf
                     <div>
-                        <input class="w-full p-3 border rounded" placeholder="Name *" type="text" />
+                        <input class="w-full p-3 border rounded" placeholder="Name *" type="text" name="name" required />
                     </div>
                     <div>
-                        <input class="w-full p-3 border rounded" placeholder="Email" type="email" />
+                        <input class="w-full p-3 border rounded" placeholder="Email" type="email" name="email" />
                     </div>
                     <div>
-                        <input class="w-full p-3 border rounded" placeholder="Phone number *" type="text" />
+                        <input class="w-full p-3 border rounded" placeholder="Phone number *" type="text" name="phone" required />
                     </div>
                     <div>
-                        <select class="w-full p-3 border rounded">
-                            <option>
-                                How did you find us?
-                            </option>
+                        <select class="w-full p-3 border rounded" name="source">
+                            <option value="google">Google</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Friend" selected>Friend</option>
                         </select>
                     </div>
+                    <input class="w-full p-3 border rounded" placeholder="Description *" type="text" name="description" required />
+
                     <button class="w-full p-3 bg-green-600 text-white font-bold rounded" type="submit">
                         SEND
                     </button>
                 </form>
+
                 <div class="mt-8 flex justify-between items-center text-center text-sm">
                     <div class="flex flex-col items-center">
                         <i class="fas fa-phone-alt text-xl mb-2">

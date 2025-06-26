@@ -42,6 +42,8 @@ use App\Http\Controllers\BookingController;
     return view('pages.contact');
 });
 
+  Route::post('contact', [ContactController::class, 'submit'])->name('contact.submit');
+
 // Dashboard Admin
 
 Route::get('/dash', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
@@ -53,10 +55,9 @@ Route::get('/dash', [DashboardController::class, 'index'])->middleware('auth')->
 });
 
 // Booking Data
-
-  Route::get('book_data', function () {
-    return view('pages.book_data');
-});
+Route::get('/admin/bookings', [BookingController::class, 'adminView'])->name('admin.bookings');
+Route::post('/admin/bookings/{id}/verify', [BookingController::class, 'verify'])->name('admin.bookings.verify');
+Route::delete('/booking/{id}', [BookingController::class, 'destroy'])->name('booking.destroy');
 
 // Schedule
 
