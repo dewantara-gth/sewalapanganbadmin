@@ -9,6 +9,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AddCourtController;
 use App\Http\Controllers\AddBookingController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 
 
 
@@ -41,6 +42,8 @@ use App\Http\Controllers\BookingController;
   Route::get('contact', function () {
     return view('pages.contact');
 });
+
+  Route::post('contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 // Dashboard Admin
 
