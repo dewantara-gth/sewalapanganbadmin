@@ -9,6 +9,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AddCourtController;
 use App\Http\Controllers\AddBookingController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 
 
 
@@ -122,3 +123,9 @@ Route::get('/addcourt', [AddCourtController::class, 'index'])->middleware('auth'
 Route::get('/add_booking', [AddBookingController::class, 'index'])->middleware('auth')->name('add_booking');
 
 Route::get('/booking', [BookingController::class, 'index']);
+
+Route::get('/booking/form', [BookingController::class, 'form'])->name('booking.form');
+Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+Route::get('/booking/invoice/{id}', [BookingController::class, 'invoice'])->name('booking.invoice');
+Route::post('/booking/upload/{id}', [BookingController::class, 'uploadBukti'])->name('upload.bukti');
+

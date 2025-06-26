@@ -23,7 +23,7 @@
 
         {{-- QRIS --}}
         <div class="my-4">
-            <img src="{{ asset('img/qris.png') }}" alt="QRIS" class="mx-auto h-24">
+            <img src="{{ asset('images/qris.jpg') }}" alt="QRIS" class="mx-auto h-24">
         </div>
 
         {{-- WhatsApp Link --}}
@@ -39,7 +39,7 @@
             );
         @endphp
 
-        <a href="https://wa.me/628978622506?text={{ $whatsappMessage }}"
+        <a href="https://wa.me/6285135689617?text={{ $whatsappMessage }}"
            target="_blank"
            class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded w-full block text-center">
             Kirim Bukti Transfer ke WhatsApp

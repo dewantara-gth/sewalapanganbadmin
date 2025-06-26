@@ -36,49 +36,62 @@
         </div>
 
         <div class="overflow-x-auto rounded-md shadow-sm">
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+    <!-- Form Pencarian -->
+    <form method="GET" action="{{ route('book_data') }}" class="flex items-center w-full md:w-1/4">
+        <input type="text" name="search" value="{{ request('search') }}" class="w-full px-3 py-2 border rounded-md" placeholder="Search by Booking Code">
+        <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Search</button>
+    </form>
+</div>
+
             <table class="w-full text-xs text-left border-collapse min-w-[700px] md:min-w-full">
-                <thead class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">No</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Name</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Phone Number</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Court</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Start Time</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">End Time</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Status</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Total Payment</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white text-gray-800">
-                    @foreach($bookings as $booking)
-                    <tr>
-                        <td class="py-2 px-3 border-b border-gray-100">{{ $loop->iteration }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->customer_name }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->phone_number }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->court }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100">{{ \Carbon\Carbon::parse($booking->start_time)->format('d/m/Y | H:i') }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100">{{ \Carbon\Carbon::parse($booking->end_time)->format('d/m/Y | H:i') }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->status }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100">Rp {{ number_format($booking->price ?? 0, 0, ',', '.') }}</td>
-                        <td class="py-2 px-3 border-b border-gray-100 flex gap-2">
-                            <form method="POST" action="{{ route('admin.bookings.verify', $booking->id) }}">
-                                @csrf
-                                <button type="submit" class="text-green-600 hover:text-green-800" title="Verifikasi">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                            </form>
-                            <form method="POST" action="{{ route('booking.destroy', $booking->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
+            <thead class="bg-gray-100 text-gray-700">
+    <tr>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">No</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Booking Code</th> <!-- Kolom baru -->
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Name</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Phone Number</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Court</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Start Time</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">End Time</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Status</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Total Payment</th>
+        <th class="py-2 px-3 font-normal border-b border-gray-200">Action</th>
+    </tr>
+</thead>
+
+<tbody class="bg-white text-gray-800">
+    @foreach($bookings as $booking)
+    <tr>
+        <td class="py-2 px-3 border-b border-gray-100">{{ $loop->iteration }}</td>
+        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->booking_code }}</td> <!-- Booking Code ditambahkan di sini -->
+        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->customer_name }}</td>
+        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->phone_number }}</td>
+        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->court }}</td>
+        <td class="py-2 px-3 border-b border-gray-100">{{ \Carbon\Carbon::parse($booking->start_time)->format('d/m/Y | H:i') }}</td>
+        <td class="py-2 px-3 border-b border-gray-100">{{ \Carbon\Carbon::parse($booking->end_time)->format('d/m/Y | H:i') }}</td>
+        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->status }}</td>
+        <td class="py-2 px-3 border-b border-gray-100">Rp {{ number_format($booking->price ?? 0, 0, ',', '.') }}</td>
+        <td class="py-2 px-3 border-b border-gray-100 flex gap-2">
+            <form method="POST" action="{{ route('admin.bookings.verify', $booking->id) }}">
+                @csrf
+                <button type="submit" class="text-green-600 hover:text-green-800" title="Verifikasi">
+                    <i class="fas fa-check"></i>
+                </button>
+            </form>
+            <form method="POST" action="{{ route('booking.destroy', $booking->id) }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
+
             </table>
         </div>
 

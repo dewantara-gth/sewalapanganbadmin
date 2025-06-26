@@ -71,8 +71,8 @@ class BookingController extends Controller
         $request->bukti_transfer->move(public_path('bukti'), $fileName);
 
         $link_bukti = asset('bukti/' . $fileName);
-        $no_admin = '628978622506';
-
+        $no_admin = '6285135689617';
+        
         $pesan = "Halo Admin,%0ASaya telah melakukan pembayaran booking.%0A"
                . "Kode Booking: {$booking->booking_code}%0A"
                . "Nama: {$booking->customer_name}%0A"
