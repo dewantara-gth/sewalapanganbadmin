@@ -68,7 +68,7 @@
             mobileMenu.classList.add("hidden");
         });
     </script>
-
+@stack('scripts')
 </body>
 </html>
 

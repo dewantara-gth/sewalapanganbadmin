@@ -45,14 +45,15 @@
                 <p class="text-xs font-normal mb-8">
                     Fill The Data
                 </p>
-                <form class="max-w-xl space-y-6">
+                <form action="{{ route('admin.booking.store') }}" method="POST" class="max-w-xl space-y-6">
+                 @csrf
                     <div>
                         <label class="block mb-2 text-xs font-normal text-[#1a1a1a]" for="court">
                             Court
-                        </label>
+                        </label>    
                         <input
                             class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 text-xs text-[#1a1a1a] placeholder:text-[#a0a0a0] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"
-                            id="court" placeholder="" type="text" />
+                            id="court" name="court" type="text" ... />
                     </div>
                     <div>
                         <label class="block mb-2 text-xs font-normal text-[#1a1a1a]" for="customerName">
@@ -60,7 +61,7 @@
                         </label>
                         <input
                             class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 text-xs text-[#1a1a1a] placeholder:text-[#a0a0a0] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"
-                            id="customerName" placeholder="" type="text" />
+                            id="customerName" name="customer_name" type="text" ... />
                     </div>
                     <div>
                         <label class="block mb-2 text-xs font-normal text-[#1a1a1a]" for="phoneNumber">
@@ -68,7 +69,8 @@
                         </label>
                         <input
                             class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 text-xs text-[#1a1a1a] placeholder:text-[#a0a0a0] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"
-                            id="phoneNumber" placeholder="" type="text" />
+                            id="phoneNumber" name="phone_number" type="text" ... />
+
                     </div>
                     <div class="flex space-x-6">
                         <div class="flex-1">
@@ -78,7 +80,8 @@
                             <div class="relative">
                                 <input
                                     class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 pr-12 text-xs text-[#a0a0a0] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"
-                                    id="startTime" placeholder="DD/MM/YY | 00.00" type="text" />
+                                    id="startTime" name="startTime" type="text" ... />
+
                                 <i
                                     class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-[#007bff] text-lg cursor-pointer">
                                 </i>
@@ -91,13 +94,31 @@
                             <div class="relative">
                                 <input
                                     class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 pr-12 text-xs text-[#a0a0a0] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"
-                                    id="endTime" placeholder="DD/MM/YY | 00.00" type="text" />
+                                    id="endTime" name="endTime" type="text" ... />
                                 <i
                                     class="fas fa-calendar-alt absolute right-4 top-1/2 -translate-y-1/2 text-[#007bff] text-lg cursor-pointer">
                                 </i>
                             </div>
                         </div>
                     </div>
+    @push('scripts')
+    {{-- Flatpickr --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#startTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        });
+
+        flatpickr("#endTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        });
+    </script>
+@endpush
                     <div class="max-w-xs">
                         <label class="block mb-2 text-xs font-normal text-[#1a1a1a]" for="status">
                             Status
@@ -105,22 +126,22 @@
                         <div class="relative">
                             <input
                                 class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 pr-10 text-xs text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"
-                                id="status" placeholder="" type="text" />
+                                id="status" name="status" type="text" ... />
                             <i
                                 class="fas fa-chevron-right absolute right-4 top-1/2 -translate-y-1/2 text-[#4a5a82] text-xs cursor-pointer">
                             </i>
                         </div>
                     </div>
-                    <div class="max-w-xs">
-                        <label class="block mb-2 text-xs font-normal text-[#1a1a1a]" for="totalpayment">
-                            Total Payment
-                        </label>
-                        <div class="relative">
-                            <input
-                                class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 pr-10 text-xs text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"
-                                id="totalpayment" placeholder="Rp" type="text" />
-                        </div>
+                <div class="max-w-xs">
+                     <label class="block mb-2 text-xs font-normal text-[#1a1a1a]" for="price">
+                      Total Payment
+                    </label>
+                    <div class="relative">
+                        <input id="price" name="price" type="number" step="0.01" min="0"
+                        class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 pr-10 text-xs text-[#1a1a1a]"
+                         placeholder="100000" required />
                     </div>
+                </div>
                     <button
                         class="bg-[#007bff] text-white text-xs font-semibold px-5 py-2 rounded shadow-md hover:bg-[#0069d9] transition"
                         type="submit">

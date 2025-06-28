@@ -23,9 +23,10 @@
                     /2 Hours
                 </span>
             </p>
-            <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">
-                <a href="{{ route('form') }}">Book Now</a>
-            </button>
+           <a href="{{ route('form', ['court_id' => $court->id]) }}"
+            class="mt-3 block w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded text-center transition">
+            Book Now
+            </a>
         </div>
     </div>
     @endforeach

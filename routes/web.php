@@ -18,6 +18,9 @@ use App\Http\Controllers\ContactController;
 //     return view('welcome');
 // });
 
+Route::post('/admin/booking/add', [AddBookingController::class, 'store'])->name('admin.booking.store');
+Route::get('/admin/booking', [AddBookingController::class, 'index'])->name('admin.booking.index');
+
 
   // Home
 

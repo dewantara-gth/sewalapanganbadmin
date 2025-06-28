@@ -3,6 +3,8 @@
 @section('title', 'Form Booking')
 
 @section('content')
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @php
     use Carbon\Carbon;
 @endphp
@@ -89,7 +91,9 @@
     </div>
 </div>
 
-{{-- Flatpickr Script --}}
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script>
     flatpickr(".flatpickr", {
         enableTime: true,
@@ -97,4 +101,3 @@
         time_24hr: true
     });
 </script>
-@endsection
