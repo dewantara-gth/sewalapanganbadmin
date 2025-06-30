@@ -36,9 +36,9 @@ Route::get('/admin/booking', [AddBookingController::class, 'index'])->name('admi
 
 // Booking Now
 
-  Route::get('booking', function () {
-    return view('pages.booking');
-});
+  // Hapus route closure di atas, gunakan ini
+Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+
 
 // Contact Us
 

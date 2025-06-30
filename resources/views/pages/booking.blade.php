@@ -2,149 +2,132 @@
 
 @section('title', 'Booking')
 
-
 @section('content')
-
-    <main class="p-4 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {{-- Replace static cards with dynamic loop --}}
+<main class="p-4 max-w-7xl mx-auto">
+  <!-- Card Court -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     @foreach($courts as $court)
     <div class="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-        <img alt="Court image"
-            class="w-full h-48 object-cover"
-            src="{{ asset('uploads/' . $court->picture) }}" />
-        <div class="p-4">
-            <h2 class="text-lg font-bold">
-                {{ $court->court_name }}
-            </h2>
-            <p class="text-green-600 text-xl font-bold">
-                {{ $court->price }}
-                <span class="text-gray-600 text-sm">
-                    /2 Hours
-                </span>
-            </p>
-           <a href="{{ route('form', ['court_id' => $court->id]) }}"
-            class="mt-3 block w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded text-center transition">
-            Book Now
-            </a>
-        </div>
+      <img alt="Court image" class="w-full h-48 object-cover" src="{{ asset('uploads/' . $court->picture) }}" />
+      <div class="p-4">
+        <h2 class="text-lg font-bold">{{ $court->court_name }}</h2>
+        <p class="text-green-600 text-xl font-bold">
+          {{ $court->price }}
+          <span class="text-gray-600 text-sm">/2 Hours</span>
+        </p>
+        <a href="{{ route('form', ['court_id' => $court->id]) }}"
+          class="mt-3 block w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded text-center transition">
+          Book Now
+        </a>
+      </div>
     </div>
     @endforeach
-</div>
+  </div>
 
+  <!-- Schedule Section -->
+  <section class="max-w-4xl mx-auto mt-12">
+    <div class="max-w-5xl mx-auto p-4">
+      <h1 class="bg-green-600 text-white font-bold text-center py-3 rounded-md select-none">BOOKING SCHEDULE</h1>
+      <div class="flex items-center justify-between mt-4">
+        <button id="prevDayBtn" class="bg-green-100 text-green-600 rounded-full p-2 flex items-center justify-center cursor-pointer select-none">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div id="currentDayLabel" class="font-semibold text-gray-700 select-none text-center flex-1"></div>
+        <button id="nextDayBtn" class="bg-green-100 text-green-600 rounded-full p-2 flex items-center justify-center cursor-pointer select-none">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="mt-6 bg-gray-100 rounded-md p-4 select-none w-full overflow-x-auto">
+        <div class="text-center mb-4">
+          <div id="dayNumber" class="text-gray-700 font-semibold text-lg"></div>
+          <div id="dayName" class="text-green-700 font-bold text-sm"></div>
+        </div>
+        <div id="courtsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <!-- Courts will be rendered here -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
-        <section class="max-w-4xl mx-auto mt-12">
-            <div class="bg-green-600 text-white text-center py-4 rounded-t">
-                <h1 class="text-xl font-bold tracking-wide">
-                    BOOKING SCHEDULE
-                </h1>
-            </div>
-            <div class="flex justify-between items-center mt-4 px-4">
-                <button aria-label="Previous month" class="bg-green-200 rounded-full p-2 hover:bg-green-300 transition"
-                    id="prevMonth">
-                    <i class="fas fa-chevron-left text-green-600">
-                    </i>
-                </button>
-                <h2 class="text-xl font-bold" id="monthYear">
-                </h2>
-                <button aria-label="Next month" class="bg-green-200 rounded-full p-2 hover:bg-green-300 transition"
-                    id="nextMonth">
-                    <i class="fas fa-chevron-right text-green-600">
-                    </i>
-                </button>
-            </div>
-            <div class="grid grid-cols-7 gap-2 mt-4 text-center text-sm select-none" id="calendarBody">
-                <!-- Calendar rendered by JS -->
-            </div>
-        </section>
-    </main>
+<script>
+  const dayNames = ["SUN", "MON", "TUE", "WED", "THUR", "FRI", "SAT"];
 
-    <script>
+  let currentDate = new Date();
+  const dayNumberEl = document.getElementById("dayNumber");
+  const dayNameEl = document.getElementById("dayName");
+  const currentDayLabelEl = document.getElementById("currentDayLabel");
+  const courtsContainer = document.getElementById("courtsContainer");
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            const dayNames = ["SUN", "MON", "TUE", "WED", "THUR", "FRI", "SAT"];
-            let currentDate = new Date();
+  function formatDate(date) {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+  }
 
-            function renderCalendar() {
-                const month = currentDate.getMonth();
-                const year = currentDate.getFullYear();
+  function renderDay(date) {
+    const day = date.getDate();
+    const dayOfWeek = date.getDay();
+    const dayName = dayNames[dayOfWeek];
 
-                // Get first day of month (0=Sunday, 1=Monday,...)
-                let firstDay = new Date(year, month, 1).getDay();
+    dayNumberEl.textContent = day;
+    dayNameEl.textContent = dayName;
+    currentDayLabelEl.textContent = formatDate(date);
 
-                const lastDate = new Date(year, month + 1, 0).getDate();
+    courtsContainer.innerHTML = "";
 
-                document.getElementById('monthYear').innerText = `${monthNames[month]}, ${year}`;
-                const calendarBody = document.getElementById('calendarBody');
-                calendarBody.innerHTML = '';
+    // Data courts & bookings dari server
+    const courts = @json($courts);
+    const bookings = @json($bookings);
+    const currentDateStr = date.toISOString().split('T')[0];
 
-                // Render day names header
-                for (let i = 0; i < dayNames.length; i++) {
-                    const dayCell = document.createElement('div');
-                    dayCell.className = 'font-bold text-green-700';
-                    dayCell.innerText = dayNames[i];
-                    calendarBody.appendChild(dayCell);
-                }
+    courts.forEach(court => {
+      const courtDiv = document.createElement("div");
+      courtDiv.className = "bg-white rounded border border-green-400 p-3 flex flex-col";
 
-                // Empty cells before first day
-                for (let i = 0; i < firstDay; i++) {
-                    const emptyCell = document.createElement('div');
-                    emptyCell.className = 'bg-gray-200 py-4 rounded';
-                    calendarBody.appendChild(emptyCell);
-                }
+      // Court title
+      const courtTitle = document.createElement("div");
+      courtTitle.className = "font-bold text-green-700 mb-2 text-center";
+      courtTitle.textContent = court.court_name;
+      courtDiv.appendChild(courtTitle);
 
-                // Render days with example sessions
-                for (let i = 1; i <= lastDate; i++) {
-                    const dateCell = document.createElement('div');
-                    dateCell.className = 'bg-gray-100 py-4 rounded flex flex-col items-center justify-start text-gray-800';
+      // Filter booking untuk court saat ini dan hari yang dipilih
+      // PERHATIKAN: field 'court' di bookings HARUS SAMA dengan 'court_name' di courts!
+      const courtBookings = bookings.filter(booking => 
+        booking.court === court.court_name &&
+        new Date(booking.start_time).toISOString().split('T')[0] === currentDateStr
+      );
 
-                    // Highlight today
-                    const today = new Date();
-                    if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                        dateCell.classList.add('bg-green-100', 'font-semibold');
-                    }
-
-                    const dateNumber = document.createElement('div');
-                    dateNumber.innerText = i;
-                    dateNumber.className = 'text-base mb-2';
-                    dateCell.appendChild(dateNumber);
-
-                    const sessions = document.createElement('div');
-                    sessions.className = 'w-full flex flex-col space-y-1';
-
-                    // Example sessions - can be replaced with real data
-                    const sessionTimes = [
-                        "08:00 - 09:00",
-                        "10:00 - 11:00",
-                        "14:00 - 15:00",
-                        "16:00 - 17:00"
-                    ];
-
-                    sessionTimes.forEach(time => {
-                        const sessionDiv = document.createElement('div');
-                        sessionDiv.className = 'border border-green-600 rounded px-1 text-xs text-green-700 bg-green-50';
-                        sessionDiv.innerText = time;
-                        sessions.appendChild(sessionDiv);
-                    });
-
-                    dateCell.appendChild(sessions);
-                    calendarBody.appendChild(dateCell);
-                }
-            }
-
-            document.getElementById('prevMonth').addEventListener('click', function () {
-                currentDate.setMonth(currentDate.getMonth() - 1);
-                renderCalendar();
-            });
-
-            document.getElementById('nextMonth').addEventListener('click', function () {
-                currentDate.setMonth(currentDate.getMonth() + 1);
-                renderCalendar();
-            });
-
-            renderCalendar();
+      if (courtBookings.length === 0) {
+        const emptySlot = document.createElement("div");
+        emptySlot.className = "border border-green-400 rounded text-gray-400 text-[9px] leading-3 py-1 mb-1 text-center";
+        emptySlot.textContent = "No booking today";
+        courtDiv.appendChild(emptySlot);
+      } else {
+        courtBookings.forEach(booking => {
+          const timeSlot = document.createElement("div");
+          timeSlot.className = "border border-green-400 rounded bg-green-50 text-green-600 text-[9px] leading-3 py-1 mb-1 text-center";
+          // Format jam: H:i
+          const start = new Date(booking.start_time).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+          const end = new Date(booking.end_time).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+          timeSlot.textContent = `${start} - ${end}`;
+          courtDiv.appendChild(timeSlot);
         });
-    </script>
+      }
 
+      courtsContainer.appendChild(courtDiv);
+    });
+  }
+
+  renderDay(currentDate);
+
+  document.getElementById("prevDayBtn").addEventListener("click", () => {
+    currentDate.setDate(currentDate.getDate() - 1);
+    renderDay(currentDate);
+  });
+
+  document.getElementById("nextDayBtn").addEventListener("click", () => {
+    currentDate.setDate(currentDate.getDate() + 1);
+    renderDay(currentDate);
+  });
+</script>
 @endsection

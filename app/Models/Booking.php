@@ -26,4 +26,11 @@ class Booking extends Model
         'start_time' => 'datetime',
         'end_time' => 'datetime',
     ];
+
+
+    protected $dates = ['start_time', 'end_time'];
+
+
+
+
 }

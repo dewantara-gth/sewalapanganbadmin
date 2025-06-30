@@ -12,10 +12,13 @@ class BookingController extends Controller
      * Menampilkan halaman booking dengan daftar court.
      */
     public function index()
-    {
-        $courts = Court::all();
-        return view('pages.booking', compact('courts'));
-    }
+{
+    $courts = Court::all();
+    $bookings = Booking::orderBy('start_time')->get();
+    return view('pages.booking', compact('courts', 'bookings'));
+}
+
+
 
     /**
      * Menampilkan form booking.
