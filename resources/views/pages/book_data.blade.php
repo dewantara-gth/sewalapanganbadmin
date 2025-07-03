@@ -24,7 +24,7 @@
     <main class="flex-1 overflow-auto">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 md:gap-0">
             <div>
-                <h2 class="text-lg font-bold text-gray-900 uppercase">BOOKING DATA</h2>
+                <h2 class="text-lg font-bold text-gray-900 uppercase">Booking Data</h2>
                 <p class="text-xs text-gray-600 mt-1 max-w-xs md:max-w-none">
                     Here is a list of all Booking Data
                 </p>
@@ -35,66 +35,87 @@
             </a>
         </div>
 
-        <div class="overflow-x-auto rounded-md shadow-sm">
+        <!-- Filter Form -->
+        <div class="mb-6">
+            <form method="GET" action="{{ route('book_data') }}" class="flex flex-wrap gap-3">
+                <input type="text" name="search" value="{{ request('search') }}"
+                    class="w-full sm:w-auto px-3 py-2 border rounded-md"
+                    placeholder="Search by Booking Code">
 
-        <div class="flex flex-col sm:flex-row gap-4 mb-6">
-    <!-- Form Pencarian -->
-    <form method="GET" action="{{ route('book_data') }}" class="flex items-center w-full md:w-1/4">
-        <input type="text" name="search" value="{{ request('search') }}" class="w-full px-3 py-2 border rounded-md" placeholder="Search by Booking Code">
-        <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Search</button>
-    </form>
-</div>
+                <select name="status" class="w-full sm:w-auto px-3 py-2 border rounded-md">
+                    <option value="">All Status</option>
+                    <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
+                    <option value="Accepted" {{ request('status') == 'Accepted' ? 'selected' : '' }}>Accepted</option>
+                </select>
 
-            <table class="w-full text-xs text-left border-collapse min-w-[700px] md:min-w-full">
-            <thead class="bg-gray-100 text-gray-700">
-    <tr>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">No</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Booking Code</th> <!-- Kolom baru -->
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Name</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Phone Number</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Court</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Start Time</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">End Time</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Status</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Total Payment</th>
-        <th class="py-2 px-3 font-normal border-b border-gray-200">Action</th>
-    </tr>
-</thead>
-
-<tbody class="bg-white text-gray-800">
-    @foreach($bookings as $booking)
-    <tr>
-        <td class="py-2 px-3 border-b border-gray-100">{{ $loop->iteration }}</td>
-        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->booking_code }}</td> <!-- Booking Code ditambahkan di sini -->
-        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->customer_name }}</td>
-        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->phone_number }}</td>
-        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->court }}</td>
-        <td class="py-2 px-3 border-b border-gray-100">{{ \Carbon\Carbon::parse($booking->start_time)->format('d/m/Y | H:i') }}</td>
-        <td class="py-2 px-3 border-b border-gray-100">{{ \Carbon\Carbon::parse($booking->end_time)->format('d/m/Y | H:i') }}</td>
-        <td class="py-2 px-3 border-b border-gray-100">{{ $booking->status }}</td>
-        <td class="py-2 px-3 border-b border-gray-100">Rp {{ number_format($booking->price ?? 0, 0, ',', '.') }}</td>
-        <td class="py-2 px-3 border-b border-gray-100 flex gap-2">
-            <form method="POST" action="{{ route('admin.bookings.verify', $booking->id) }}">
-                @csrf
-                <button type="submit" class="text-green-600 hover:text-green-800" title="Verifikasi">
-                    <i class="fas fa-check"></i>
+                <button type="submit" class="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded">
+                    Filter
                 </button>
             </form>
-            <form method="POST" action="{{ route('booking.destroy', $booking->id) }}">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </form>
-        </td>
-    </tr>
-    @endforeach
-</tbody>
+        </div>
 
+        <!-- Table -->
+        <div class="overflow-x-auto border border-gray-200 rounded-md shadow-sm">
+            <table class="min-w-[800px] w-full text-xs text-left border-collapse">
+                <thead class="bg-gray-100 text-gray-700">
+                    <tr>
+                        <th class="py-2 px-3 border-b">No</th>
+                        <th class="py-2 px-3 border-b">Booking Code</th>
+                        <th class="py-2 px-3 border-b">Name</th>
+                        <th class="py-2 px-3 border-b">Phone Number</th>
+                        <th class="py-2 px-3 border-b">Court</th>
+                        <th class="py-2 px-3 border-b">Start Time</th>
+                        <th class="py-2 px-3 border-b">End Time</th>
+                        <th class="py-2 px-3 border-b">Status</th>
+                        <th class="py-2 px-3 border-b">Total Payment</th>
+                        <th class="py-2 px-3 border-b">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white text-gray-800">
+                    @forelse($bookings as $booking)
+                    <tr>
+                        <td class="py-2 px-3 border-b">{{ $loop->iteration + ($bookings->currentPage() - 1) * $bookings->perPage() }}</td>
+                        <td class="py-2 px-3 border-b">{{ $booking->booking_code }}</td>
+                        <td class="py-2 px-3 border-b">{{ $booking->customer_name }}</td>
+                        <td class="py-2 px-3 border-b">{{ $booking->phone_number }}</td>
+                        <td class="py-2 px-3 border-b">{{ $booking->court }}</td>
+                        <td class="py-2 px-3 border-b">{{ \Carbon\Carbon::parse($booking->start_time)->format('d/m/Y | H:i') }}</td>
+                        <td class="py-2 px-3 border-b">{{ \Carbon\Carbon::parse($booking->end_time)->format('d/m/Y | H:i') }}</td>
+                        <td class="py-2 px-3 border-b">{{ $booking->status }}</td>
+                        <td class="py-2 px-3 border-b">Rp {{ number_format($booking->price ?? 0, 0, ',', '.') }}</td>
+                        <td class="py-2 px-3 border-b">
+                            <div class="flex flex-wrap gap-2">
+                                <form method="POST" action="{{ route('admin.bookings.verify', $booking->id) }}">
+                                    @csrf
+                                    <button type="submit" class="text-green-600 hover:text-green-800" title="Verifikasi">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </form>
+                                <form method="POST" action="{{ route('booking.destroy', $booking->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="10" class="text-center text-gray-500 py-4">No data found.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
             </table>
         </div>
 
+        <!-- Pagination -->
+        <div class="mt-6">
+            {{ $bookings->withQueryString()->links() }}
+        </div>
+
+        <!-- Export Buttons -->
         <div class="mt-6 flex flex-col sm:flex-row gap-4">
             <a href="#" class="bg-purple-600 text-white text-xs font-semibold px-5 py-2 rounded shadow hover:bg-purple-700">
                 Download PDF

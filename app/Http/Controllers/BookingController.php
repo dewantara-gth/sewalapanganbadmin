@@ -112,10 +112,26 @@ class BookingController extends Controller
     /**
      * (Opsional) Menampilkan semua booking ke halaman admin.
      */
-    public function adminView()
-    {
-        $bookings = Booking::all();
-        return view('pages.book_data', compact('bookings'));
+    public function adminView(Request $request)
+{
+    $query = Booking::query();
+
+    // Filter pencarian berdasarkan Booking Code
+    if ($request->filled('search')) {
+        $query->where('booking_code', 'like', '%' . $request->search . '%');
     }
+
+    // Filter status hanya jika status tidak kosong atau null
+    if ($request->filled('status') && in_array($request->status, ['Pending', 'Accepted'])) {
+        $query->where('status', $request->status);
+    }
+
+    // Ambil data dengan pagination (10 data per halaman)
+    $bookings = $query->orderBy('start_time')->paginate(10);
+
+    // Tetap menyertakan query string saat berpindah halaman
+    return view('pages.book_data', compact('bookings'));
+}
+
 }
     

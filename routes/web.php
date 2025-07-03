@@ -117,7 +117,7 @@ Route::get('/courts/edit/{id}', [CourtController::class, 'edit']);
 Route::put('/courts/update/{id}', [CourtController::class, 'update']);
 Route::delete('/courts/delete/{id}', [CourtController::class, 'destroy']);
 
-Route::get('/book_data', [BookDataController::class, 'index'])->middleware('auth')->name('book_data');
+Route::get('/book_data', [BookingController::class, 'adminView'])->middleware('auth')->name('book_data');
 
 Route::get('/schedule', [ScheduleController::class, 'index'])->middleware('auth')->name('schedule');
 
