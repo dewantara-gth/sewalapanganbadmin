@@ -9,8 +9,16 @@ class Booking extends Model
 {
     use HasFactory;
 
+    // app/Models/Booking.php
+
+public function court()
+{
+    return $this->belongsTo(Court::class);
+}
+
+
    protected $fillable = [
-    'court',
+    'court_id',
     'customer_name',
     'phone_number',
     'start_time',

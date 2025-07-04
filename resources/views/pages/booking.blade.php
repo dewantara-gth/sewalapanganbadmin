@@ -15,10 +15,10 @@
           {{ $court->price }}
           <span class="text-gray-600 text-sm">/2 Hours</span>
         </p>
-        <a href="{{ route('form', ['court_id' => $court->id]) }}"
-          class="mt-3 block w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded text-center transition">
-          Book Now
-        </a>
+       <a href="{{ route('booking.form', ['court_id' => $court->id]) }}"
+        class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded block text-center">
+        Book Now
+      </a>
       </div>
     </div>
     @endforeach
@@ -77,7 +77,8 @@
 
     // Data courts & bookings dari server
     const courts = @json($courts);
-    const bookings = @json($bookings);
+    const bookings = @json($bookings->where('status', 'Accepted')->values());
+
     const currentDateStr = date.toISOString().split('T')[0];
 
     courts.forEach(court => {
@@ -92,10 +93,10 @@
 
       // Filter booking untuk court saat ini dan hari yang dipilih
       // PERHATIKAN: field 'court' di bookings HARUS SAMA dengan 'court_name' di courts!
-      const courtBookings = bookings.filter(booking => 
-        booking.court === court.court_name &&
-        new Date(booking.start_time).toISOString().split('T')[0] === currentDateStr
-      );
+     const courtBookings = bookings.filter(booking =>
+    booking.court?.court_name === court.court_name &&
+    new Date(booking.start_time).toISOString().split('T')[0] === currentDateStr
+    );
 
       if (courtBookings.length === 0) {
         const emptySlot = document.createElement("div");

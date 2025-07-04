@@ -3,6 +3,11 @@
 @section('title', 'Booking Data')
 
 @section('content')
+@if (session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
 <div class="flex-1 p-4 md:p-10 flex flex-col">
     <div class="flex justify-between items-center mb-6">
         <div class="mobile-menu">
@@ -78,7 +83,7 @@
                         <td class="py-2 px-3 border-b">{{ $booking->booking_code }}</td>
                         <td class="py-2 px-3 border-b">{{ $booking->customer_name }}</td>
                         <td class="py-2 px-3 border-b">{{ $booking->phone_number }}</td>
-                        <td class="py-2 px-3 border-b">{{ $booking->court }}</td>
+                        <td class="py-2 px-3 border-b">{{ $booking->court->court_name ?? '-' }}</td>
                         <td class="py-2 px-3 border-b">{{ \Carbon\Carbon::parse($booking->start_time)->format('d/m/Y | H:i') }}</td>
                         <td class="py-2 px-3 border-b">{{ \Carbon\Carbon::parse($booking->end_time)->format('d/m/Y | H:i') }}</td>
                         <td class="py-2 px-3 border-b">{{ $booking->status }}</td>
@@ -91,13 +96,15 @@
                                         <i class="fas fa-check"></i>
                                     </button>
                                 </form>
-                                <form method="POST" action="{{ route('booking.destroy', $booking->id) }}">
+                               <form method="POST" action="{{ route('booking.destroy', $booking->id) }}"
+                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus booking ini?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
-                                        <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
+
                             </div>
                         </td>
                     </tr>

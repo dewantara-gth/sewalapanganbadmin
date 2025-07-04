@@ -14,7 +14,7 @@ class BookingController extends Controller
     public function index()
 {
     $courts = Court::all();
-    $bookings = Booking::orderBy('start_time')->get();
+    $bookings = Booking::with('court')->orderBy('start_time')->get();
     return view('pages.booking', compact('courts', 'bookings'));
 }
 
@@ -23,10 +23,13 @@ class BookingController extends Controller
     /**
      * Menampilkan form booking.
      */
-    public function form()
-    {
-        return view('pages.booking-form');
-    }
+    public function form($court_id)
+{
+    $court = Court::findOrFail($court_id);
+    return view('pages.form', compact('court'));
+
+}
+
 
     /**
      * Menyimpan data booking dan mengarahkan ke halaman invoice.
@@ -34,7 +37,8 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'court'         => 'required|string|max:255',
+            
+            'court_id' => 'required|exists:courts,id',
             'customer_name' => 'required|string|max:255',
             'phone_number'  => 'required|string|max:15',
             'start_time'    => 'required|date',
@@ -55,7 +59,7 @@ class BookingController extends Controller
      */
     public function invoice($id)
     {
-        $booking = Booking::findOrFail($id);
+        $booking = Booking::with('court')->findOrFail($id);
         return view('pages.invoice', compact('booking'));
     }
 
@@ -63,28 +67,35 @@ class BookingController extends Controller
      * Upload bukti transfer dan redirect ke WhatsApp admin.
      */
     public function uploadBukti(Request $request, $id)
-    {
-        $request->validate([
-            'bukti_transfer' => 'required|image|max:2048',
-        ]);
+{
+    $request->validate([
+        'bukti_transfer' => 'required|image|max:2048',
+    ]);
 
-        $booking = Booking::findOrFail($id);
+    $booking = Booking::findOrFail($id);
 
-        $fileName = time() . '.' . $request->bukti_transfer->extension();
-        $request->bukti_transfer->move(public_path('bukti'), $fileName);
+    $fileName = time() . '.' . $request->bukti_transfer->extension();
+    $request->bukti_transfer->move(public_path('bukti'), $fileName);
 
-        $link_bukti = asset('bukti/' . $fileName);
-        $no_admin = '6285135689617';
-        
-        $pesan = "Halo Admin,%0ASaya telah melakukan pembayaran booking.%0A"
-               . "Kode Booking: {$booking->booking_code}%0A"
-               . "Nama: {$booking->customer_name}%0A"
-               . "Bukti transfer: {$link_bukti}";
+    $link_bukti = asset('bukti/' . $fileName);
+    $no_admin = '6285135689617';
 
-        $link_wa = "https://wa.me/{$no_admin}?text={$pesan}";
+    // SUSUN PESAN MULTILINE
+    $message = "Halo Admin,\n"
+             . "Saya telah melakukan pembayaran booking.\n"
+             . "Kode Booking: {$booking->booking_code}\n"
+             . "Nama: {$booking->customer_name}\n"
+             . "Tanggal: " . \Carbon\Carbon::parse($booking->start_time)->format('d-m-Y') . "\n"
+             . "Jam: " . \Carbon\Carbon::parse($booking->start_time)->format('H:i') . " - " . \Carbon\Carbon::parse($booking->end_time)->format('H:i') . "\n"
+             . "Lapangan: " . ($booking->court->court_name ?? '-') . "\n"
+             . "Bukti transfer: {$link_bukti}";
 
-        return redirect($link_wa);
-    }
+    // ENCODE SEMUA PESAN
+    $link_wa = "https://wa.me/{$no_admin}?text=" . rawurlencode($message);
+
+    return redirect($link_wa);
+}
+
 
     /**
      * Hapus data booking.

@@ -33,11 +33,16 @@
                 @csrf
 
                 {{-- Court --}}
-                <div class="mb-4">
-                    <label for="court" class="block text-sm font-medium text-gray-700 mb-1">Court</label>
-                    <input type="text" name="court" id="court" value="{{ old('court') }}" required
-                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400">
-                </div>
+                {{-- Input tersembunyi --}}
+    <input type="hidden" name="court_id" value="{{ $court->id }}">
+
+{{-- Tampilkan nama court tapi disable --}}
+<div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700 mb-1">Court</label>
+    <input type="text" value="{{ $court->court_name }}" disabled ...
+        class="w-full px-3 py-2 border rounded shadow-sm bg-gray-100 cursor-not-allowed">
+</div>
+
 
                 {{-- Customer Name --}}
                 <div class="mb-4">
@@ -56,9 +61,10 @@
                 {{-- Price --}}
                 <div class="mb-4">
                 <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Harga (Rp)</label>
-                <input type="number" name="price" id="price" value="{{ old('price') }}" required
-                    class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400"
-                placeholder="Contoh: 50000">
+                <input type="number" name="price" id="price" value="{{ old('price') }}" readonly
+                    class="w-full px-3 py-2 border rounded shadow-sm bg-gray-100 cursor-not-allowed"
+                    placeholder="Harga akan dihitung otomatis">
+
                 </div>
 
                 {{-- Start & End Time --}}
@@ -95,9 +101,92 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-    flatpickr(".flatpickr", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true
+    document.addEventListener('DOMContentLoaded', function () {
+        const hargaPerJam = {{ $court->price }};
+
+        function hitungHarga() {
+            const startInput = document.getElementById("start_time").value;
+            const endInput = document.getElementById("end_time").value;
+
+            if (startInput && endInput) {
+                const start = new Date(startInput);
+                const end = new Date(endInput);
+
+                if (end > start) {
+                    const durationInMs = end - start;
+                    const durationInHours = durationInMs / (1000 * 60 * 60);
+                    const totalHours = Math.ceil(durationInHours);
+                    const totalPrice = totalHours * hargaPerJam;
+
+                    document.getElementById("price").value = totalPrice;
+                } else {
+                    document.getElementById("price").value = 0;
+                }
+            }
+        }
+
+        function setupFlatpickr(selector, defaultHour) {
+            flatpickr(selector, {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                time_24hr: true,
+                minuteIncrement: 60,
+                minTime: "08:00",
+                maxTime: "22:00",
+                defaultHour: defaultHour,
+                onValueUpdate: function(selectedDates, dateStr, instance) {
+                    // paksa menit ke 00
+                    if (selectedDates.length > 0) {
+                        const selected = selectedDates[0];
+                        if (selected.getMinutes() !== 0) {
+                            selected.setMinutes(0);
+                            selected.setSeconds(0);
+                            instance.setDate(selected, true); // true = trigger onChange lagi
+                        }
+                    }
+                },
+                onChange: hitungHarga
+            });
+        }
+
+        setupFlatpickr("#start_time", 8);
+        setupFlatpickr("#end_time", 9);
+
+        hitungHarga();
+
+        document.getElementById("start_time").addEventListener("change", hitungHarga);
+        document.getElementById("end_time").addEventListener("change", hitungHarga);
     });
+
+
+
+    const hargaPerJam = {{ $court->price }}; // Harga per jam dari database
+
+    function hitungHarga() {
+        const startInput = document.getElementById("start_time").value;
+        const endInput = document.getElementById("end_time").value;
+
+        if (startInput && endInput) {
+            const start = new Date(startInput);
+            const end = new Date(endInput);
+
+            if (end > start) {
+                const durationInMs = end - start;
+                const durationInHours = durationInMs / (1000 * 60 * 60);
+                const totalHours = Math.ceil(durationInHours); // pembulatan ke atas
+                const totalPrice = totalHours * hargaPerJam;
+
+                document.getElementById("price").value = totalPrice;
+            } else {
+                document.getElementById("price").value = 0;
+            }
+        }
+    }
+
+    // Hitung ulang saat halaman pertama kali dimuat
+    window.addEventListener("load", hitungHarga);
+
+    // Event listener tambahan kalau flatpickr tidak trigger otomatis
+    document.getElementById("start_time").addEventListener("change", hitungHarga);
+    document.getElementById("end_time").addEventListener("change", hitungHarga);
 </script>
