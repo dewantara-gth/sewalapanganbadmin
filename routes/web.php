@@ -133,3 +133,6 @@
     Route::get('/booking/invoice/{id}', [BookingController::class, 'invoice'])->name('booking.invoice');
     Route::post('/booking/upload/{id}', [BookingController::class, 'uploadBukti'])->name('upload.bukti');
 
+    Route::get('/booking/invoice/{id}', [BookingController::class, 'invoice'])->name('booking.invoice');
+
+

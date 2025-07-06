@@ -40,7 +40,7 @@
                     <tr>
                         <th class="py-2 px-3 font-normal border-b border-gray-200">No</th>
                         <th class="py-2 px-3 font-normal border-b border-gray-200">Court Number</th>
-                        <th class="py-2 px-3 font-normal border-b border-gray-200">Price/ 2 Hours</th>
+                        <th class="py-2 px-3 font-normal border-b border-gray-200">Price/ Hours</th>
                         <th class="py-2 px-3 font-normal border-b border-gray-200">Picture</th>
                         <th class="py-2 px-3 font-normal border-b border-gray-200">Action</th>
                     </tr>
@@ -72,14 +72,6 @@
             </table>
         </div>
 
-        <div class="mt-6 flex flex-col sm:flex-row gap-4">
-            <button class="bg-purple-600 text-white text-xs font-semibold px-5 py-2 rounded shadow hover:bg-purple-700 focus:outline-none whitespace-nowrap">
-                Download PDF
-            </button>
-            <button class="bg-purple-600 text-white text-xs font-semibold px-5 py-2 rounded shadow hover:bg-purple-700 focus:outline-none whitespace-nowrap">
-                Download Excel
-            </button>
-        </div>
     </main>
 </div>
 

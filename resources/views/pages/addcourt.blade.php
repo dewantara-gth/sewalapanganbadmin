@@ -54,7 +54,7 @@
 
             <div>
                 <label class="block mb-2 text-xs font-normal text-[#1a1a1a]" for="price">
-                    Price/ 2 Hours
+                    Price/ Hours
                 </label>
                 <input
                     class="w-full rounded-full border border-[#6b6fcf] px-6 py-3 text-xs text-[#1a1a1a] placeholder:text-[#a0a0a0] focus:outline-none focus:ring-2 focus:ring-[#6b6fcf]"

@@ -54,7 +54,7 @@ class CourtController extends Controller
             'picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = $request->only(['court_name', 'description']);
+        $data = $request->only(['court_name', 'price']);
 
         if ($request->hasFile('picture')) {
             $filename = time() . '.' . $request->picture->extension();

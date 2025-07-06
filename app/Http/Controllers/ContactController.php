@@ -34,7 +34,7 @@ class ContactController extends Controller
     
 
     // Nomor WhatsApp Admin (ganti dengan nomor yang sesuai)
-    $whatsappNumber = '6285953931911'; 
+    $whatsappNumber = '6285135689617'; 
 
     // URL WhatsApp dengan pesan yang terformat
     $url = "https://wa.me/{$whatsappNumber}?text={$message}";

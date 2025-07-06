@@ -13,7 +13,7 @@
         <h2 class="text-lg font-bold">{{ $court->court_name }}</h2>
         <p class="text-green-600 text-xl font-bold">
           {{ $court->price }}
-          <span class="text-gray-600 text-sm">/2 Hours</span>
+          <span class="text-gray-600 text-sm">/ Hours</span>
         </p>
        <a href="{{ route('booking.form', ['court_id' => $court->id]) }}"
         class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded block text-center">

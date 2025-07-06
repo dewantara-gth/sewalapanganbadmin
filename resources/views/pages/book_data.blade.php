@@ -105,6 +105,9 @@
                                     </button>
                                 </form>
 
+                                <a href="{{ route('booking.invoice', ['id' => $booking->id]) }}?plain=1" class="text-blue-600 hover:text-blue-800" title="Invoice" >
+                                    <i class="fas fa-file-invoice"></i>
+
                             </div>
                         </td>
                     </tr>
@@ -116,6 +119,19 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Modal Overlay & Container -->
+<div id="invoiceModal" class="fixed inset-0 z-50 hidden bg-black/60 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full relative">
+        <!-- Tombol Close -->
+        <button onclick="closeInvoiceModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+        <!-- Loader & Konten Invoice -->
+        <div id="invoiceModalBody" class="p-6 min-h-[200px] flex items-center justify-center">
+            <span class="text-gray-400">Memuat...</span>
+        </div>
+    </div>
+</div>
+
 
         <!-- Pagination -->
         <div class="mt-6">

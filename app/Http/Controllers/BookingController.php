@@ -58,10 +58,18 @@ class BookingController extends Controller
      * Menampilkan halaman invoice berdasarkan ID booking.
      */
     public function invoice($id)
-    {
-        $booking = Booking::with('court')->findOrFail($id);
-        return view('pages.invoice', compact('booking'));
+{
+    $booking = Booking::with('court')->findOrFail($id);
+
+    // Jika ada ?plain=1 di URL, tampilkan tanpa layout
+    if (request()->query('plain') == 1) {
+        return view('pages.invoice_partial', compact('booking'));
     }
+
+    // Default: tampilkan dengan layout
+    return view('pages.invoice', compact('booking'));
+}
+
 
     /**
      * Upload bukti transfer dan redirect ke WhatsApp admin.
