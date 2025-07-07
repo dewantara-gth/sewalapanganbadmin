@@ -34,7 +34,7 @@
                     Here is a list of all Booking Data
                 </p>
             </div>
-            <a href="{{ route('add_booking') }}"
+            <a href="{{ route('add_booking') }} "
                class="bg-blue-600 text-white text-xs font-semibold px-4 py-2 rounded shadow hover:bg-blue-700 focus:outline-none whitespace-nowrap">
                 Add Booking Data
             </a>
@@ -121,17 +121,16 @@
         </div>
 
         <!-- Modal Overlay & Container -->
-<div id="invoiceModal" class="fixed inset-0 z-50 hidden bg-black/60 flex items-center justify-center">
-    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full relative">
-        <!-- Tombol Close -->
-        <button onclick="closeInvoiceModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
-        <!-- Loader & Konten Invoice -->
-        <div id="invoiceModalBody" class="p-6 min-h-[200px] flex items-center justify-center">
-            <span class="text-gray-400">Memuat...</span>
+        <div id="invoiceModal" class="fixed inset-0 z-50 hidden bg-black/60 flex items-center justify-center">
+            <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full relative">
+                <!-- Tombol Close -->
+                <button onclick="closeInvoiceModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+                <!-- Loader & Konten Invoice -->
+                <div id="invoiceModalBody" class="p-6 min-h-[200px] flex items-center justify-center">
+                    <span class="text-gray-400">Memuat...</span>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
 
         <!-- Pagination -->
         <div class="mt-6">
@@ -140,13 +139,84 @@
 
         <!-- Export Buttons -->
         <div class="mt-6 flex flex-col sm:flex-row gap-4">
-            <a href="#" class="bg-purple-600 text-white text-xs font-semibold px-5 py-2 rounded shadow hover:bg-purple-700">
+            <a href="#" id="downloadPdf" class="bg-purple-600 text-white text-xs font-semibold px-5 py-2 rounded shadow hover:bg-purple-700">
                 Download PDF
             </a>
-            <a href="#" class="bg-purple-600 text-white text-xs font-semibold px-5 py-2 rounded shadow hover:bg-purple-700">
+            <a href="#" id="downloadExcel" class="bg-purple-600 text-white text-xs font-semibold px-5 py-2 rounded shadow hover:bg-purple-700">
                 Download Excel
             </a>
         </div>
     </main>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+<script>
+    // Function to download PDF
+    document.getElementById('downloadPdf').addEventListener('click', function () {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text('Booking Data Report', 10, 10);
+        
+        const tableData = [];
+        const header = ['Booking Code', 'Name', 'Phone Number', 'Court', 'Start Time', 'End Time', 'Status', 'Total Payment'];
+        const rows = document.querySelectorAll('table tbody tr');
+        
+        rows.forEach(row => {
+            const rowData = [];
+            const cells = row.querySelectorAll('td');
+            cells.forEach(cell => {
+                rowData.push(cell.innerText);
+            });
+            tableData.push(rowData);
+        });
+
+        doc.autoTable({
+            head: [header],
+            body: tableData,
+            startY: 20,
+            styles: {
+                fontSize: 6,
+                cellPadding: 5,
+                halign: 'center',
+                valign: 'middle',
+            },
+            headStyles: {
+                fillColor: [0, 0, 0],
+                textColor: [255, 255, 255],
+            },
+            alternateRowStyles: {
+                fillColor: [240, 240, 240],
+            },
+            margin: { top: 30 },
+        });
+
+        doc.save('booking_data.pdf');
+    });
+
+    // Function to download Excel
+    document.getElementById('downloadExcel').addEventListener('click', function () {
+        const data = [];
+        const table = document.querySelector('table');
+        const rows = table.querySelectorAll('tr');
+
+        rows.forEach((row) => {
+            const rowData = [];
+            const cells = row.querySelectorAll('td, th');
+            cells.forEach(cell => {
+                rowData.push(cell.innerText);
+            });
+            data.push(rowData);
+        });
+
+        const ws = XLSX.utils.aoa_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Booking Data");
+
+        XLSX.writeFile(wb, 'booking_data.xlsx');
+    });
+</script>
+
 @endsection
