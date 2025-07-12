@@ -29,26 +29,28 @@
 
         {{-- QRIS --}}
         <div class="my-4">
-            <img src="{{ asset('images/qris.jpg') }}" alt="QRIS" class="mx-auto h-24">
+            <p><strong>SCAN QRIS</strong></p>
+            <img src="{{ asset('images/qris.jpg') }}" alt="QRIS" class="mx-auto h-40">
         </div>
 
         {{-- Rekening --}}
         <p><strong>Bank Mandiri:</strong> 02839827387197101</p>
 
         {{-- WhatsApp Message --}}
-        @php
-        $message = "Halo Admin,%0A" .
-        "Saya telah melakukan pembayaran booking.%0A%0A" .
-        "*Kode Booking:* {$booking->booking_code}%0A" .
-        "*Nama:* {$booking->customer_name}%0A" .
-        "*Tanggal:* " . \Carbon\Carbon::parse($booking->start_time)->format('d-m-Y') . "%0A" .
-        "*Jam:* " . \Carbon\Carbon::parse($booking->start_time)->format('H:i') . " - " .
-        \Carbon\Carbon::parse($booking->end_time)->format('H:i') . "%0A" .
-        "*Lapangan:* " . ($booking->court->court_name ?? '-') . "%0A" .
-        "*Total Harga:* Rp " . number_format($booking->price ?? 0, 0, ',', '.') . "%0A%0A" .
-        "Mohon konfirmasi pembayaran.%0A" .
-        "Terima kasih.";
-        @endphp
+@php
+$message = "Halo Admin,%0A" .
+    "Saya telah melakukan pembayaran booking.%0A%0A" .
+    "*Kode Booking:* {$booking->booking_code}%0A" .
+    "*Nama:* {$booking->customer_name}%0A" .
+    "*Tanggal:* " . \Carbon\Carbon::parse($booking->start_time)->format('d-m-Y') . "%0A" .
+    "*Jam:* " . \Carbon\Carbon::parse($booking->start_time)->format('H:i') . " - " .
+    \Carbon\Carbon::parse($booking->end_time)->format('H:i') . "%0A" .
+    "*Lapangan:* " . ($booking->court->court_name ?? '-') . "%0A" .
+    "*Total Harga:* Rp " . number_format($booking->price ?? 0, 0, ',', '.') . "%0A%0A" .
+    "Mohon konfirmasi pembayaran.%0A" .
+    "Terima kasih.%0A%0A";
+    
+@endphp
 
 
 

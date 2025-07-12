@@ -60,11 +60,19 @@
                 </div>
             </div>
 
-            <!-- Embed Google Maps Here -->
-            <div class="w-full md:w-1/2 mt-8 md:mt-0 md:ml-8">
-                <!-- Replace with your Google Maps Embed code -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0578062716795!2d104.04588167472416!3d1.118720498870558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d98921856ddfab%3A0xf9d9fc65ca00c9d!2sPoliteknik%20Negeri%20Batam!5e0!3m2!1sid!2sid!4v1751759747665!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+            <<div class="w-full md:w-1/2 mt-8 md:mt-0 md:ml-8">
+    <!-- Embed Google Maps Here -->
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0578062716795!2d104.04588167472416!3d1.118720498870558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d98921856ddfab%3A0xf9d9fc65ca00c9d!2sPoliteknik%20Negeri%20Batam!5e0!3m2!1sid!2sid!4v1751759747665!5m2!1sid!2sid" 
+        width="100%" 
+        height="400" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
         </div>
     </main>
 

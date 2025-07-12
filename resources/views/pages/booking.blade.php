@@ -15,10 +15,10 @@
           {{ $court->price }}
           <span class="text-gray-600 text-sm">/ Hours</span>
         </p>
-       <a href="{{ route('booking.form', ['court_id' => $court->id]) }}"
-        class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded block text-center">
-        Book Now
-      </a>
+        <a href="{{ route('booking.form', ['court_id' => $court->id]) }}"
+           class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded block text-center">
+          Book Now
+        </a>
       </div>
     </div>
     @endforeach
@@ -26,28 +26,35 @@
 
   <!-- Schedule Section -->
   <section class="max-w-4xl mx-auto mt-12">
-    <div class="max-w-5xl mx-auto p-4">
-      <h1 class="bg-green-600 text-white font-bold text-center py-3 rounded-md select-none">BOOKING SCHEDULE</h1>
-      <div class="flex items-center justify-between mt-4">
-        <button id="prevDayBtn" class="bg-green-100 text-green-600 rounded-full p-2 flex items-center justify-center cursor-pointer select-none">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <div id="currentDayLabel" class="font-semibold text-gray-700 select-none text-center flex-1"></div>
-        <button id="nextDayBtn" class="bg-green-100 text-green-600 rounded-full p-2 flex items-center justify-center cursor-pointer select-none">
-          <i class="fas fa-chevron-right"></i>
-        </button>
+  <div class="max-w-5xl mx-auto p-4">
+    <h1 class="bg-green-600 text-white font-bold text-center py-3 rounded-md select-none">BOOKING SCHEDULE</h1>
+    <div class="flex items-center justify-between mt-4">
+      <button id="prevDayBtn" class="bg-green-100 text-green-600 rounded-full p-2 flex items-center justify-center cursor-pointer select-none">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div id="currentDayLabel" class="font-semibold text-gray-700 select-none text-center flex-1"></div>
+      <button id="nextDayBtn" class="bg-green-100 text-green-600 rounded-full p-2 flex items-center justify-center cursor-pointer select-none">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="mt-6 bg-gray-100 rounded-md p-4 select-none w-full overflow-x-auto">
+      <div class="text-center mb-4">
+        <div id="dayNumber" class="text-gray-700 font-semibold text-lg"></div>
+        <div id="dayName" class="text-green-700 font-bold text-sm"></div>
       </div>
-      <div class="mt-6 bg-gray-100 rounded-md p-4 select-none w-full overflow-x-auto">
-        <div class="text-center mb-4">
-          <div id="dayNumber" class="text-gray-700 font-semibold text-lg"></div>
-          <div id="dayName" class="text-green-700 font-bold text-sm"></div>
-        </div>
-        <div id="courtsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <!-- Courts will be rendered here -->
-        </div>
+      <div id="courtsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- Courts will be rendered here -->
       </div>
     </div>
-  </section>
+
+    <!-- Additional Notes Section -->
+    <div class="mt-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
+      <p class="font-semibold text-lg">Notes:</p>
+      <p>Pastikan Anda memilih lapangan dan jam yang belum terdaftar. Pilih waktu yang sesuai dan tidak berbenturan dengan jadwal yang sudah ada.</p>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <script>
@@ -79,7 +86,8 @@
     const courts = @json($courts);
     const bookings = @json($bookings->where('status', 'Accepted')->values());
 
-    const currentDateStr = date.toISOString().split('T')[0];
+    // Perbaikan: gunakan toLocaleDateString('en-CA') agar tidak terjadi pergeseran tanggal
+    const currentDateStr = date.toLocaleDateString('en-CA'); // format: YYYY-MM-DD
 
     courts.forEach(court => {
       const courtDiv = document.createElement("div");
@@ -92,11 +100,11 @@
       courtDiv.appendChild(courtTitle);
 
       // Filter booking untuk court saat ini dan hari yang dipilih
-      // PERHATIKAN: field 'court' di bookings HARUS SAMA dengan 'court_name' di courts!
-     const courtBookings = bookings.filter(booking =>
-    booking.court?.court_name === court.court_name &&
-    new Date(booking.start_time).toISOString().split('T')[0] === currentDateStr
-    );
+      // PERHATIAN: field 'court' di bookings HARUS SAMA dengan 'court_name' di courts!
+      const courtBookings = bookings.filter(booking => 
+        booking.court?.court_name === court.court_name &&
+        new Date(booking.start_time).toLocaleDateString('en-CA') === currentDateStr
+      );
 
       if (courtBookings.length === 0) {
         const emptySlot = document.createElement("div");

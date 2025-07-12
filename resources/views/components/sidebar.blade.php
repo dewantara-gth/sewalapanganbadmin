@@ -22,12 +22,6 @@
             <i class="fas fa-list-alt mr-3"></i>
             <span>Booking Data</span>
         </a>
-
-        <a href="{{ url('schedule') }}"
-           class="flex items-center py-2 px-8 {{ Request::is('schedule') ? 'text-blue-700' : 'text-gray-700 hover:bg-gray-200' }}">
-            <i class="fas fa-calendar-alt mr-3"></i>
-            <span>Schedule</span>
-        </a>
     </nav>
 </div>
 
@@ -47,11 +41,6 @@
            class="flex items-center py-2 px-8 text-white rounded {{ Request::is('book_data') ?  : 'hover:bg-gray-700' }}">
             <i class="fas fa-list-alt mr-3"></i>
             <span>Booking Data</span>
-        </a>
-        <a href="{{ url('schedule') }}"
-           class="flex items-center py-2 px-8 text-white rounded {{ Request::is('schedule') ?  : 'hover:bg-gray-700' }}">
-            <i class="fas fa-calendar-alt mr-3"></i>
-            <span>Schedule</span>
         </a>
         <button id="close-menu" class="mt-4 text-white focus:outline-none" aria-label="Close menu">
             <i class="fas fa-times text-2xl"></i>
