@@ -136,3 +136,6 @@
     Route::get('/booking/invoice/{id}', [BookingController::class, 'invoice'])->name('booking.invoice');
 
 
+Route::get('/cek-booking', [BookingController::class, 'cekBookingForm'])->name('booking.cek.form');
+Route::post('/cek-booking', [BookingController::class, 'cekBooking'])->name('booking.cek');
+

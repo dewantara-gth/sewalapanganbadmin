@@ -23,6 +23,10 @@
            class="{{ Request::is('contact') ? 'text-green-600 border-b-2 border-green-600' : 'hover:text-green-600' }}">
             Contact Us
         </a>
+        <a href="{{ route('booking.cek.form') }}"
+           class="{{ Request::is('cek-booking') ? 'text-green-600 border-b-2 border-green-600' : 'hover:text-green-600' }}">
+            Cek Booking
+        </a>
     </div>
 
     <div class="hidden md:flex space-x-4">
@@ -53,6 +57,10 @@
     <a class="block px-4 py-2 {{ Request::is('contact') ? 'text-green-600 border-b-2 border-green-600' : 'hover:text-green-600' }}"
        href="{{ url('contact') }}">
         Contact Us
+    </a>
+    <a class="block px-4 py-2 {{ Request::is('cek-booking') ? 'text-green-600 border-b-2 border-green-600' : 'hover:text-green-600' }}"
+       href="{{ route('booking.cek.form') }}">
+        Cek Booking
     </a>
 
     <div class="flex justify-center space-x-4 py-2">

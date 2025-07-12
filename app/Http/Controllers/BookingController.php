@@ -12,24 +12,20 @@ class BookingController extends Controller
      * Menampilkan halaman booking dengan daftar court.
      */
     public function index()
-{
-    $courts = Court::all();
-    $bookings = Booking::with('court')->orderBy('start_time')->get();
-    return view('pages.booking', compact('courts', 'bookings'));
-}
-
-
+    {
+        $courts = Court::all();
+        $bookings = Booking::with('court')->orderBy('start_time')->get();
+        return view('pages.booking', compact('courts', 'bookings'));
+    }
 
     /**
      * Menampilkan form booking.
      */
     public function form($court_id)
-{
-    $court = Court::findOrFail($court_id);
-    return view('pages.form', compact('court'));
-
-}
-
+    {
+        $court = Court::findOrFail($court_id);
+        return view('pages.form', compact('court'));
+    }
 
     /**
      * Menyimpan data booking dan mengarahkan ke halaman invoice.
@@ -37,7 +33,6 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            
             'court_id' => 'required|exists:courts,id',
             'customer_name' => 'required|string|max:255',
             'phone_number'  => 'required|string|max:15',
@@ -58,52 +53,50 @@ class BookingController extends Controller
      * Menampilkan halaman invoice berdasarkan ID booking.
      */
     public function invoice($id)
-{
-    $booking = Booking::with('court')->findOrFail($id);
+    {
+        $booking = Booking::with('court')->findOrFail($id);
 
-    // Jika ada ?plain=1 di URL, tampilkan tanpa layout
-    if (request()->query('plain') == 1) {
-        return view('pages.invoice_partial', compact('booking'));
+        // Jika ada ?plain=1 di URL, tampilkan tanpa layout
+        if (request()->query('plain') == 1) {
+            return view('pages.invoice_partial', compact('booking'));
+        }
+
+        // Default: tampilkan dengan layout
+        return view('pages.invoice', compact('booking'));
     }
-
-    // Default: tampilkan dengan layout
-    return view('pages.invoice', compact('booking'));
-}
-
 
     /**
      * Upload bukti transfer dan redirect ke WhatsApp admin.
      */
     public function uploadBukti(Request $request, $id)
-{
-    $request->validate([
-        'bukti_transfer' => 'required|image|max:2048',
-    ]);
+    {
+        $request->validate([
+            'bukti_transfer' => 'required|image|max:2048',
+        ]);
 
-    $booking = Booking::findOrFail($id);
+        $booking = Booking::findOrFail($id);
 
-    $fileName = time() . '.' . $request->bukti_transfer->extension();
-    $request->bukti_transfer->move(public_path('bukti'), $fileName);
+        $fileName = time() . '.' . $request->bukti_transfer->extension();
+        $request->bukti_transfer->move(public_path('bukti'), $fileName);
 
-    $link_bukti = asset('bukti/' . $fileName);
-    $no_admin = '6285135689617';
+        $link_bukti = asset('bukti/' . $fileName);
+        $no_admin = '6285135689617';
 
-    // SUSUN PESAN MULTILINE
-    $message = "Halo Admin,\n"
-             . "Saya telah melakukan pembayaran booking.\n"
-             . "Kode Booking: {$booking->booking_code}\n"
-             . "Nama: {$booking->customer_name}\n"
-             . "Tanggal: " . \Carbon\Carbon::parse($booking->start_time)->format('d-m-Y') . "\n"
-             . "Jam: " . \Carbon\Carbon::parse($booking->start_time)->format('H:i') . " - " . \Carbon\Carbon::parse($booking->end_time)->format('H:i') . "\n"
-             . "Lapangan: " . ($booking->court->court_name ?? '-') . "\n"
-             . "Bukti transfer: {$link_bukti}";
+        // SUSUN PESAN MULTILINE
+        $message = "Halo Admin,\n"
+                 . "Saya telah melakukan pembayaran booking.\n"
+                 . "Kode Booking: {$booking->booking_code}\n"
+                 . "Nama: {$booking->customer_name}\n"
+                 . "Tanggal: " . \Carbon\Carbon::parse($booking->start_time)->format('d-m-Y') . "\n"
+                 . "Jam: " . \Carbon\Carbon::parse($booking->start_time)->format('H:i') . " - " . \Carbon\Carbon::parse($booking->end_time)->format('H:i') . "\n"
+                 . "Lapangan: " . ($booking->court->court_name ?? '-') . "\n"
+                 . "Bukti transfer: {$link_bukti}";
 
-    // ENCODE SEMUA PESAN
-    $link_wa = "https://wa.me/{$no_admin}?text=" . rawurlencode($message);
+        // ENCODE SEMUA PESAN
+        $link_wa = "https://wa.me/{$no_admin}?text=" . rawurlencode($message);
 
-    return redirect($link_wa);
-}
-
+        return redirect($link_wa);
+    }
 
     /**
      * Hapus data booking.
@@ -132,25 +125,49 @@ class BookingController extends Controller
      * (Opsional) Menampilkan semua booking ke halaman admin.
      */
     public function adminView(Request $request)
-{
-    $query = Booking::query();
+    {
+        $query = Booking::query();
 
-    // Filter pencarian berdasarkan Booking Code
-    if ($request->filled('search')) {
-        $query->where('booking_code', 'like', '%' . $request->search . '%');
+        // Filter pencarian berdasarkan Booking Code
+        if ($request->filled('search')) {
+            $query->where('booking_code', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter status hanya jika status tidak kosong atau null
+        if ($request->filled('status') && in_array($request->status, ['Pending', 'Accepted'])) {
+            $query->where('status', $request->status);
+        }
+
+        // Ambil data dengan pagination (10 data per halaman)
+        $bookings = $query->orderBy('start_time')->paginate(10);
+
+        // Tetap menyertakan query string saat berpindah halaman
+        return view('pages.book_data', compact('bookings'));
     }
 
-    // Filter status hanya jika status tidak kosong atau null
-    if ($request->filled('status') && in_array($request->status, ['Pending', 'Accepted'])) {
-        $query->where('status', $request->status);
+    /**
+     * Menampilkan form cek status booking.
+     */
+    public function cekBookingForm()
+    {
+        return view('pages.cek_booking');
     }
 
-    // Ambil data dengan pagination (10 data per halaman)
-    $bookings = $query->orderBy('start_time')->paginate(10);
+    /**
+     * Memproses cek status booking berdasarkan kode booking.
+     */
+    public function cekBooking(Request $request)
+    {
+        $request->validate([
+            'booking_code' => 'required|string',
+        ]);
 
-    // Tetap menyertakan query string saat berpindah halaman
-    return view('pages.book_data', compact('bookings'));
-}
+        $booking = Booking::where('booking_code', $request->booking_code)->first();
 
+        if ($booking) {
+            return view('pages.cek_booking_result', compact('booking'));
+        } else {
+            return back()->with('error', 'Booking tidak ditemukan. Pastikan kode booking sudah benar.');
+        }
+    }
 }
-    
