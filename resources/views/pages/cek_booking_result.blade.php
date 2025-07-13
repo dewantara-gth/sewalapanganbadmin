@@ -9,12 +9,12 @@
         <div class="text-xs text-gray-400 mt-1">Kode: <span class="font-semibold">{{ $booking->booking_code }}</span></div>
     </div>
 
-    <!-- Tombol Cek Booking Lainnya di Pojok Kanan -->
     <div class="ml-auto">
-        <a href="{{ route('booking.cek.form') }}" class="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Cek Booking Lainnya
-        </a>
-    </div>
+    <a href="{{ route('booking.cek.form') }}" class="inline-block px-1 py-1.5 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+        Cek Booking Lainnya
+    </a>
+</div>
+
 </div>
 
 <div class="mb-6">
