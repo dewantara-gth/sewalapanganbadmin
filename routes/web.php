@@ -139,3 +139,6 @@
 Route::get('/cek-booking', [BookingController::class, 'cekBookingForm'])->name('booking.cek.form');
 Route::post('/cek-booking', [BookingController::class, 'cekBooking'])->name('booking.cek');
 
+Route::get('/book-data/export', [BookDataController::class, 'getAllBookingsForExport'])->name('book_data.export');
+
+
