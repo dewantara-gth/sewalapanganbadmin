@@ -1,15 +1,12 @@
 <p align="center">
     <a href="https://laravel.com" target="_blank">
-        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
+        <img src="https://img.freepik.com/premium-vector/vector-flat-badminton-logo-design_1107171-444.jpg?w=360" width="400" alt="Laravel Logo">
     </a>
 </p>
 
 <p align="center">
     <a href="https://github.com/dewantara-gth/sewalapanganbadmin">
         <img src="https://img.shields.io/badge/Project%20Repo-GitHub-blue" alt="Project Repo">
-    </a>
-    <a href="https://www.polibatam.ac.id/">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsVzfpSIJwPecEHGTBMTeGKFympiN1GcQEA&s" alt="License">
     </a>
 </p>
 
