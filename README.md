@@ -8,14 +8,8 @@
     <a href="https://github.com/dewantara-gth/sewalapanganbadmin">
         <img src="https://img.shields.io/badge/Project%20Repo-GitHub-blue" alt="Project Repo">
     </a>
-    <a href="https://packagist.org/packages/laravel/framework">
-        <img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads">
-    </a>
-    <a href="https://packagist.org/packages/laravel/framework">
-        <img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version">
-    </a>
-    <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-green" alt="License">
+    <a href="https://www.polibatam.ac.id/">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsVzfpSIJwPecEHGTBMTeGKFympiN1GcQEA&s" alt="License">
     </a>
 </p>
 
