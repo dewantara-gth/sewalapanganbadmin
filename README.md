@@ -10,6 +10,15 @@
     </a>
 </p>
 
+## FILE AAS
+
+- **Proyek PBL (GitHub)**: [Link Repo GitHub](https://github.com/dewantara-gth/sewalapanganbadmin.git)
+- **Video Presentasi**: [Link ke Video Presentasi](https://youtu.be/Z7pC2kIPOV0?feature=shared)
+- **Video Tutorial Penggunaan Aplikasi**: [Link ke Video Tutorial](#)
+- **Laporan Akhir**: [Link ke Laporan Akhir](https://docs.google.com/document/d/1iOogcM9h4HOltcFwmjiKgFyQ0s_KpEazk0267W9v1Xw/edit?usp=sharing)
+
+
+
 ## Tentang Sewalapanganbadmin
 
 Sewalapanganbadmin adalah aplikasi web yang dibangun menggunakan **Laravel**, yang dirancang untuk mengelola penyewaan lapangan olahraga. Aplikasi ini menyediakan antarmuka untuk admin dalam mengatur jadwal lapangan, transaksi pembayaran, serta melihat laporan penggunaan lapangan secara efisien dan efektif.
@@ -57,8 +66,9 @@ Ikuti langkah-langkah berikut untuk menginstal aplikasi di lingkungan lokal Anda
    php artisan key:generate
 
 5. **Konfigurasi basis data:**:
-
+    ```bash
    Sesuaikan pengaturan database di file .env.
+   File Database ada di database/db_badmin.sql
 
 6. **Migrasi basis data**:
 
