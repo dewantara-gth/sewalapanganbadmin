@@ -92,68 +92,140 @@ Ikuti langkah-langkah berikut untuk menginstal aplikasi di lingkungan lokal Anda
 
 ## Cara Penggunaan Aplikasi
 
-### 1. **Login atau Daftar Pengguna**
-   - **Pengguna Baru**: 
-     - Kunjungi halaman **Login** dan klik pada tombol **Daftar**.
-     - Isi form pendaftaran dengan informasi berikut:
-       - **Nama Lengkap**: Nama lengkap pengguna.
-       - **Email**: Alamat email yang akan digunakan untuk login.
-       - **Kata Sandi**: Buat kata sandi yang aman.
-     - Setelah mendaftar, Anda akan diarahkan ke halaman login untuk masuk ke aplikasi.
+### 1. **Untuk Pelanggan/Pengguna**
 
-   - **Pengguna Terdaftar**:
-     - Kunjungi halaman **Login**.
-     - Masukkan **Email** dan **Kata Sandi** yang sudah didaftarkan sebelumnya.
-     - Klik tombol **Login** untuk masuk ke dalam aplikasi.
+#### **A. Melihat Lapangan yang Tersedia**
+- Kunjungi halaman **Home** untuk melihat daftar lapangan badminton yang tersedia
+- Setiap lapangan ditampilkan dengan informasi:
+  - Gambar lapangan
+  - Nama lapangan (Court 1, Court 2, dst.)
+  - Harga sewa per jam (contoh: Rp25.000,00)
+  - Tombol **Book Now** untuk melakukan pemesanan
 
-### 2. **Manajemen Lapangan**
-   Setelah berhasil login sebagai admin, Anda dapat mengelola jadwal penyewaan lapangan melalui antarmuka admin:
+#### **B. Melakukan Pemesanan**
+1. **Pilih Lapangan**:
+   - Klik tombol **Book Now** pada lapangan yang diinginkan
+   - Anda akan diarahkan ke halaman **Booking Court**
 
-   - **Melihat Jadwal**:
-     - Di halaman utama dashboard, Anda dapat melihat daftar lapangan yang tersedia, beserta jadwal sewa yang sudah terdaftar.
-   
-   - **Menambah Jadwal**:
-     - Klik tombol **Tambah Jadwal** pada halaman **Jadwal Lapangan**.
-     - Isi form dengan data berikut:
-       - **Nama Lapangan**: Nama lapangan yang akan disewakan.
-       - **Tanggal & Jam**: Tanggal dan waktu yang tersedia.
-       - **Harga Sewa**: Harga sewa untuk lapangan tersebut.
-     - Klik **Simpan** untuk menambahkan jadwal lapangan ke dalam sistem.
-   
-   - **Mengedit Jadwal**:
-     - Pada halaman **Jadwal Lapangan**, klik **Edit** pada jadwal yang ingin diubah.
-     - Perbarui informasi yang diperlukan dan klik **Simpan** untuk memperbarui data.
+2. **Isi Form Pemesanan**:
+   - **Nama Pelanggan**: Masukkan nama lengkap Anda
+   - **Nomor Telepon**: Masukkan nomor telepon yang aktif
+   - **Waktu Mulai**: Pilih jam mulai pemesanan
+   - **Waktu Selesai**: Pilih jam selesai pemesanan
+   - Nama lapangan dan harga akan otomatis terisi
+   - Klik **Booking Sekarang** untuk melanjutkan
 
-   - **Menghapus Jadwal**:
-     - Klik tombol **Hapus** pada jadwal yang ingin dihapus.
+3. **Halaman Invoice**:
+   - Setelah pemesanan berhasil, Anda akan melihat halaman invoice yang berisi:
+     - Nomor invoice unik
+     - Detail pemesanan (nama, tanggal, jam, lapangan)
+     - Total harga yang harus dibayar
+     - Status pembayaran
+     - QR Code untuk pembayaran
+     - Informasi rekening Bank Mandiri
 
-### 3. **Proses Pemesanan dan Pembayaran**
-   - **Pemesanan Lapangan**:
-     - Pengguna dapat memilih lapangan yang ingin disewa pada halaman **Pemesanan**.
-     - Pilih lapangan yang tersedia pada tanggal dan jam yang diinginkan, lalu klik **Pesan**.
-   
-   - **Pembayaran**:
-     - Setelah pemesanan berhasil, pengguna akan diarahkan ke halaman **Pembayaran**.
-     - Pilih metode pembayaran yang tersedia (misalnya transfer bank, e-wallet, dll).
-     - Setelah melakukan pembayaran, admin akan menerima notifikasi dan dapat memverifikasi transaksi tersebut.
+#### **C. Proses Pembayaran**
+1. **Melakukan Pembayaran**:
+   - Transfer sesuai nominal yang tertera ke rekening Bank Mandiri
+   - Atau gunakan QR Code untuk pembayaran digital
 
-   - **Verifikasi Pembayaran**:
-     - Admin dapat melihat status pembayaran di halaman **Transaksi**.
-     - Klik **Verifikasi Pembayaran** untuk menyetujui transaksi dan mengonfirmasi pemesanan lapangan.
+2. **Kirim Bukti Transfer**:
+   - Klik tombol **Kirim Bukti Transfer ke WhatsApp**
+   - Kirim screenshot/foto bukti transfer melalui WhatsApp
+   - Tunggu konfirmasi dari admin
 
-### 4. **Laporan Penggunaan Lapangan**
-   - **Melihat Laporan**:
-     - Admin dapat mengakses laporan penggunaan lapangan di halaman **Laporan**.
-     - Laporan ini mencakup statistik penggunaan lapangan dan pendapatan dari transaksi yang dilakukan.
+#### **D. Melihat Jadwal Pemesanan**
+- Kunjungi halaman **Booking Schedule** untuk melihat:
+  - Jadwal ketersediaan lapangan
+  - Slot waktu yang sudah terisi atau masih kosong
+  - Navigasi bulan untuk melihat jadwal bulan lain
 
-   - **Ekspor Laporan**:
-     - Klik tombol **Ekspor** pada halaman laporan untuk mengunduh laporan dalam format **CSV** atau **PDF**.
+#### **E. Menghubungi Admin**
+- Gunakan halaman **Contact Us** untuk:
+  - Mengisi form kontak dengan pertanyaan
+  - Melihat peta lokasi Jaya Badminton Hall
+  - Menghubungi langsung via telepon/email yang tercantum
 
-### 5. **Notifikasi**
-   - **Notifikasi Pengguna**:
-     - Pengguna akan menerima notifikasi melalui email dan aplikasi jika status pemesanannya berubah.
-     - Notifikasi ini akan menginformasikan mengenai konfirmasi pemesanan, pembatalan, atau perubahan jadwal.
+### 2. **Untuk Admin**
 
-   - **Notifikasi Admin**:
-     - Admin akan menerima pemberitahuan setiap kali ada transaksi baru atau pemesanan yang perlu diverifikasi.
+#### **A. Login Admin**
+1. **Pendaftaran Admin Baru**:
+   - Kunjungi halaman **Sign Up**
+   - Isi form dengan:
+     - **Name**: Nama lengkap admin
+     - **Email address**: Email aktif
+     - **Password**: Kata sandi yang aman
+   - Klik **Sign Up** untuk mendaftar
+
+2. **Login Admin**:
+   - Kunjungi halaman **Sign In**
+   - Masukkan **Name** dan **Password**
+   - Klik **Sign In** untuk masuk ke dashboard admin
+
+#### **B. Mengelola Data Lapangan**
+1. **Melihat Data Lapangan**:
+   - Akses halaman **Court** untuk melihat daftar lapangan
+   - Tabel menampilkan: nomor lapangan, harga per jam, gambar, dan aksi
+
+2. **Menambah Lapangan Baru**:
+   - Klik tombol **Add Court**
+   - Isi form dengan:
+     - **Court Number**: Nomor/nama lapangan
+     - **Price/Hours**: Harga sewa per jam
+     - **Upload Picture**: Gambar lapangan
+   - Klik **Add Court** untuk menyimpan
+
+3. **Mengedit/Menghapus Lapangan**:
+   - Gunakan ikon edit untuk mengubah data lapangan
+   - Gunakan ikon hapus untuk menghapus lapangan
+
+#### **C. Mengelola Data Pemesanan**
+1. **Melihat Daftar Pemesanan**:
+   - Akses halaman **Booking Data**
+   - Filter berdasarkan status: **Pending** atau **Accepted**
+   - Lihat informasi: kode booking, nomor telepon, lapangan, waktu, status, total pembayaran
+
+2. **Menambah Pemesanan Manual**:
+   - Klik **Add Booking Data** untuk pemesanan langsung di tempat
+   - Isi form dengan:
+     - **Pemilihan Lapangan**: Pilih lapangan dari dropdown
+     - **Nama Customer**: Nama pelanggan
+     - **Nomor Telepon**: Kontak pelanggan
+     - **Waktu Mulai dan Selesai**: Jadwal pemesanan
+     - **Status**: Pending atau Accepted
+   - Total pembayaran akan dihitung otomatis
+   - Klik **Add Booking Data** untuk menyimpan
+
+3. **Mengelola Status Pemesanan**:
+   - **Konfirmasi Pemesanan**: Ubah status dari Pending ke Accepted
+   - **Salin Link Invoice**: Untuk dikirim ke WhatsApp customer
+   - **Ekspor Data**: Download data dalam format PDF atau Excel
+
+#### **D. Melihat Jadwal dalam Kalender**
+- Akses halaman **Schedule Data** untuk:
+  - Melihat jadwal pemesanan dalam tampilan kalender bulanan
+  - Navigasi antar bulan dengan tombol panah
+  - Menambah sesi pemesanan baru dengan tombol **Add Session**
+
+#### **E. Verifikasi Pembayaran**
+1. **Menerima Bukti Transfer**:
+   - Terima bukti transfer dari customer via WhatsApp
+   - Verifikasi kesesuaian nominal dan data pemesanan
+
+2. **Konfirmasi Pembayaran**:
+   - Ubah status pemesanan menjadi **Accepted**
+   - Sistem akan mengupdate jadwal secara otomatis
+   - Customer akan mendapat konfirmasi pemesanan
+
+### 3. **Fitur Komunikasi**
+- **WhatsApp Integration**: Untuk pengiriman bukti transfer dan komunikasi langsung
+- **Form Kontak**: Untuk pertanyaan umum dan feedback
+- **Informasi Kontak**: Telepon, fax, dan email tersedia di halaman Contact Us
+
+### 4. **Akses Sistem**
+- **Pengguna**: Dapat mengakses tanpa login untuk pemesanan
+- **Admin**: Memerlukan login untuk akses dashboard dan manajemen data
+- **Responsive Design**: Dapat diakses melalui desktop dan mobile device
+- **Ketersediaan**: Sistem beroperasi 24/7 untuk pemesanan kapan saja
+
 
