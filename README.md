@@ -49,3 +49,43 @@ Ikuti langkah-langkah berikut untuk menginstal aplikasi di lingkungan lokal Anda
    ```bash
    git clone https://github.com/dewantara-gth/sewalapanganbadmin.git
    cd sewalapanganbadmin
+
+2. **Instal dependensi PHP**:
+
+   ```bash
+   composer install
+
+3. **Salin file .env.example menjadi .env**:
+
+   ```bash
+   cp .env.example .env
+
+4. **Generate kunci aplikasi**:
+
+   ```bash
+   php artisan key:generate
+
+5. **Konfigurasi basis data:**:
+
+   Sesuaikan pengaturan database di file .env.
+
+6. **Migrasi basis data**:
+
+   ```bash
+   php artisan migrate
+
+7. **Instal dependensi frontend**:
+
+   ```bash
+   npm install
+
+8. **Bangun aset frontend**:
+
+   ```bash
+   npm run dev
+
+9. **Jalankan server pengembangan**:
+
+   ```bash
+   php artisan serve
+
