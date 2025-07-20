@@ -12,10 +12,12 @@
 
 ## FILE AAS
 
+- **Google Drive File AAS**: [Link ke Drive](https://drive.google.com/file/d/1JIVuoHD2WHMU9w9c6VZeYrrrSUAnXILi/view?usp=drive_link)
 - **Proyek PBL (GitHub)**: [Link Repo GitHub](https://github.com/dewantara-gth/sewalapanganbadmin.git)
 - **Video Presentasi**: [Link ke Video Presentasi](https://youtu.be/Z7pC2kIPOV0?feature=shared)
-- **Video Tutorial Penggunaan Aplikasi**: [Link ke Video Tutorial](#)
+- **Video Tutorial Penggunaan Aplikasi**: [Link ke Video Demo](https://youtu.be/mITZHnyhn7I?feature=shared)
 - **Laporan Akhir**: [Link ke Laporan Akhir](https://docs.google.com/document/d/1iOogcM9h4HOltcFwmjiKgFyQ0s_KpEazk0267W9v1Xw/edit?usp=sharing)
+
 
 
 
